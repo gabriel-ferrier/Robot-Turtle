@@ -19,6 +19,7 @@ public class Plateau {
     }
 
     public void initialiserPlateau() {
+        System.out.println("Voici le plateau de jeu");
         plateau = new char[getTaille()][getTaille()];
         for (int i = 0; i < getTaille(); i++) {
             for (int j = 0; j < getTaille(); j++) {
