@@ -7,6 +7,7 @@ public class Menu {
     public int nombreJoueurs;
 
     public Menu() {
+        int a = getNombreJoueurs();
     }
 
     public int getNombreJoueurs() {
