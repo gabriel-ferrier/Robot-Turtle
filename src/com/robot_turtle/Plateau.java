@@ -35,27 +35,36 @@ public class Plateau {
                 System.out.println("Voici votre plateau de jeu \n");
                 plateau[0][2] = "tortue 1";
                 plateau[0][5] = "tortue 2";
+                plateau[4][1] = "joyau 1 ";
+                plateau[5][7] = "joyau 2 ";
                 for (String[] ligne : getPlateau()) { //parcours toute les lignes du tableau
-                    System.out.println(Arrays.toString(ligne)); //affiche ligne par ligne le plateau
+                    System.out.println(Arrays.toString(ligne)+"\n"); //affiche ligne par ligne le plateau
                 }
                 break;
             case 3 :
                 System.out.println("Voici votre plateau de jeu \n");
                 plateau[0][2] = "tortue 1";
-                plateau[0][5] = "tortue 2";
-                plateau[7][3] = "tortue 3";
+                plateau[0][4] = "tortue 2";
+                plateau[0][6] = "tortue 3";
+                plateau[5][1] = "joyau 1 ";
+                plateau[5][7] = "joyau 2 ";
+                plateau[7][4] = "joyau 3 ";
                 for (String[] ligne : getPlateau()) {
-                    System.out.println(Arrays.toString(ligne));
+                    System.out.println(Arrays.toString(ligne)+"\n");
                 }
                 break;
             case 4 :
                 System.out.println("Voici votre plateau de jeu \n");
-                plateau[0][2] = "tortue 1";
-                plateau[0][5] = "tortue 2";
-                plateau[7][2] = "tortue 3";
-                plateau[7][5] = "tortue 4";
+                plateau[0][1] = "tortue 1";
+                plateau[0][3] = "tortue 2";
+                plateau[0][5] = "tortue 3";
+                plateau[0][7] = "tortue 4";
+                plateau[5][1] = "joyau 1 ";
+                plateau[5][7] = "joyau 2 ";
+                plateau[7][4] = "joyau 3 ";
+                plateau[7][7] = "joyaux 4 ";
                 for (String[] ligne : getPlateau()) {
-                    System.out.println(Arrays.toString(ligne));
+                    System.out.println(Arrays.toString(ligne)+"\n");
                 }
                 break;
             default:
