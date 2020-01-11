@@ -1,14 +1,17 @@
 package com.robot_turtle;
 
 public class Game {
+
+    public static int nbJoueurs;
+
     public static void main(String[] args) {
         Menu menu = new Menu();
-        menu.NombreJoueurs();
-        Joueur joueur = new Joueur(menu.getNombreJoueurs());
-        Plateau plateau = new Plateau(menu.getNombreJoueurs());
-
-        /*Joueur joueur1 = new Joueur("Gab");
-        Joueur joueur2 = new Joueur("Salim");
-        Joueur joueur3 = new Joueur("Oussama");*/
+        nbJoueurs = menu.getNombreJoueurs();
+        GestionJoueurs joueurs = new GestionJoueurs(nbJoueurs);
+        //Joueur joueurs = new Joueur(nbJoueurs);
+        joueurs.getListeJoueurs().get(0);
+        //Plateau plateau = new Plateau(nbJoueurs);
+        //TourDeJeu tourDeJeu = new TourDeJeu(joueurs.getNoms(), menu.getNombreJoueurs());
+        //Fenetre test = new Fenetre();
     }
 }

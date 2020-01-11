@@ -33,7 +33,7 @@ public class Plateau {
         switch (nb){
             case 2 :
                 System.out.println("Voici votre plateau de jeu \n");
-                plateau[0][2] = "tortue 1";
+                plateau[0][2] = "tortue 1";   // definir position joueur 1 pour réutiliser instruction
                 plateau[0][5] = "tortue 2";
                 plateau[4][1] = "joyau 1 ";
                 plateau[5][7] = "joyau 2 ";
