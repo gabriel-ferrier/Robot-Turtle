@@ -6,11 +6,36 @@ import java.util.List;
 
 
 public class GestionCartes {
+    private int numero;
     private ArrayList<Cartes> programme = new ArrayList<>(); //correspond au programme personnalisé de chaque joueur
     private ArrayList<Cartes> pioche = new ArrayList<>(); //liste des jeux de 37 cartes de chaque joueur
     private ArrayList<Cartes> deckCarte = new ArrayList<>(); //liste des jeuPerso de carte de chaque joueur
     private ArrayList<Cartes> deckObstacle = new ArrayList<>(); //liste des jeuPerso d'obstacles de chaque joueur
     private ArrayList<Cartes> defausse = new ArrayList<>(); //poubelle de carte
+
+    public GestionCartes(int numero) {//On associe une pioche et un jeuPerso carte/obs a chaque joueur
+        this.numero = numero;
+        for (int i = 0; i < 3; i++) {
+            this.deckObstacle.add(Cartes.PIERRE);
+        }
+        for (int i = 0; i < 2; i++) {
+            deckObstacle.add(Cartes.GLACE);
+        }
+        for (int i = 0; i < 18; i++) {
+            pioche.add(Cartes.BLEU);
+        }
+        for (int i = 0; i < 8; i++) {
+            pioche.add(Cartes.JAUNE);
+        }
+        for (int i = 0; i < 8; i++) {
+            pioche.add(Cartes.VIOLET);
+        }
+        Collections.shuffle(pioche); //Melange l'ordre des cartes de la pioche
+        for (int i = 0; i < 5; i++) {
+            this.deckCarte.add(this.pioche.get((pioche.size() - 1)));
+            this.pioche.remove((pioche.size() - 1));
+        }
+    }
 
     public ArrayList<Cartes> getProgramme() {
         return programme;
@@ -51,27 +76,4 @@ public class GestionCartes {
     public void setDefausse(ArrayList<Cartes> defausse) {
         this.defausse = defausse;
     }
-
-    public GestionCartes() {           //On associe une pioche et un jeuPerso carte/obs a chaque joueur
-        for (int i = 0; i < 3; i++) {
-            deckObstacle.add(Cartes.PIERRE);
-        }
-        for (int i = 0; i < 2; i++) {
-            deckObstacle.add(Cartes.GLACE);
-        }
-        for (int i = 0; i < 18; i++) {
-            pioche.add(Cartes.BLEU);
-        }
-        for (int i = 0; i < 7; i++) {
-            pioche.add(Cartes.JAUNE);
-            pioche.add(Cartes.VIOLET);
-        }
-        Collections.shuffle(pioche); //Melange l'ordre des cartes de la pioche
-        for (int i = 0; i < 5; i++) {
-           deckCarte.add(pioche.get(pioche.size()-1));
-           pioche.remove(pioche.get(pioche.size()-1));
-        }
-    }
-
-
 }

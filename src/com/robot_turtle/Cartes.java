@@ -4,6 +4,7 @@ public enum Cartes {
     BLEU("carte bleue"),
     JAUNE("carte jaune"),
     VIOLET("carte violette"),
+    ROUGE("carte rouge"),
     PIERRE("obstacle marron"),
     GLACE("obstacle de glace");
 

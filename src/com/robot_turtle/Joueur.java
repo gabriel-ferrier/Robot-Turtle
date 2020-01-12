@@ -6,26 +6,39 @@ import java.util.Scanner;
 public class Joueur {
     public static Scanner scanner = new Scanner(System.in);
     private int numero;
-    private int posX;
-    private int posY;
-    private int posInitialeX;
+    private int posX; // Position tortue
+    private int posY; // Position tortue
+    private String direction; // Direction tortue
+    private String direcionInitiale = " Sud ";
+    private int posInitialeX; // Position initiale tortue, = posX pour apres
     private int posInitialeY;
     /*private int posFinaleX;
-        private int posFinaleY;*/
-    private int choixInstruction;
-    private GestionCartes toutesCartes;
+    private int posFinaleY;*/
+    public int choixInstruction;
+    private GestionCartes toutesCartes; // Avoir accès aux jeux de cartes de chaque joueur
 
-    public int getChoixInstruction() {
-        return choixInstruction;
+
+
+    public Joueur(int numero) {
+        this.numero = numero;
+        this.toutesCartes = new GestionCartes(numero); //creer un env de cartes qui est associé au joueur du meme numero
     }
 
-    public void setChoixInstruction(int choixInstruction) {
-        this.choixInstruction = choixInstruction;
-    }
 
-    public int getNumero() {
-        return numero;
-    }
+
+    public String getDirection() { return direction; }
+
+    public void setDirection(String direction) { this.direction = direction; }
+
+    public String getDirecionInitiale() { return direcionInitiale; }
+
+    public void setDirecionInitiale(String direcionInitiale) { this.direcionInitiale = direcionInitiale; }
+
+    public int getChoixInstruction() { return choixInstruction; }
+
+    public void setChoixInstruction(int choixInstruction) { this.choixInstruction = choixInstruction; }
+
+    public int getNumero() { return numero; }
 
     public void setNumero(int numero) {
         this.numero = numero;
@@ -72,78 +85,92 @@ public class Joueur {
     }
 
 
-    public Joueur(int numero) {
-        this.toutesCartes = new GestionCartes(); //creer un env de cartes qui est associé au joueur du meme numero
 
-    }
-
-    public void choixInstruction() {
-        for (int i = 1; i <= Game.nbJoueurs; i++) {
-            System.out.println(" Tour de " + GestionJoueurs.listeJoueurs.get(i));
-            System.out.println(" 1 : Compléter programme \n " +
-                    " 2 : Placer un mur \n " +
-                    " 3 : Exécuter programme \n ");
+    public void instruction(Plateau plateau) {
+        for (int i = 0; i < Game.nbJoueurs; i++) {
+            System.out.println(" Tour de Joueur " + GestionJoueurs.listeJoueurs.get(i).getNumero());
+            System.out.println(" 1 : Compléter programme " +
+                    " \n 2 : Placer un mur  " +
+                    " \n 3 : Exécuter programme  ");
             choixInstruction = scanner.nextInt();
+            switch (choixInstruction) {
+                case 1:
+                    completerProgramme(i);
+                    break;
+                case 2:
+                    placerMur(i,plateau.getPlateau());
+                    plateau.afficherPlateau();
+                    break;
+                case 3:
+                    executerProgramme(i);
+                    break;
+            }
         }
-        switch (choixInstruction) {
-            case 1:
-                completerProgramme();
-                break;
-            case 2:
-                placerMur();
-                break;
-            case 3:
-                break;
-        }
+
     }
 
-    public void completerProgramme() {
-        System.out.println(this.toutesCartes.getDeckCarte() + " est votre jeu actuel \n" +
+    public void completerProgramme(int valueOfPlayer) {
+        System.out.println(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte() + " est votre deck de cartes \n" +
                 " Combien de carte(s) voulez-vous ajouter à votre programme ? ");
         int nombreCarte = scanner.nextInt();
         for (int i = 0; i < nombreCarte; i++) {
+            System.out.println(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte() + " est votre deck de cartes \n");
             System.out.println(" Quel indice de carte voulez-vous ajouter ");
             int indice = scanner.nextInt();
-            this.toutesCartes.getProgramme().add(this.toutesCartes.getDeckCarte().get(indice));
-            this.toutesCartes.getDeckCarte().remove(this.toutesCartes.getDeckCarte().get(indice));
-            System.out.println("Il vous reste " + (this.toutesCartes.getDeckCarte().size() - nombreCarte) + " carte(s) " +
-                    " Que voulez- vous en faire (0 = défausse et 1 = piocher) ? ");
-            int choix = scanner.nextInt();
-            if (choix == 0) {
-                System.out.println("Combien de carte(s) voulez-vous mettre à la défausse ? ");
-                int combien = scanner.nextInt();
-                for (int j = 0; j < combien; j++) {
-                    System.out.println(" Quel indice de carte voulez-vous mettre à la défausse ? ");
-                    int indiceDefausse = scanner.nextInt();
-                    this.toutesCartes.getDefausse().add(this.toutesCartes.getDeckCarte().get(indiceDefausse));
-                }
-            } else if (choix == 1) {
-                do {
-                    this.toutesCartes.getDeckCarte().add(this.toutesCartes.getPioche().get((toutesCartes.getPioche().size() - 1)));
-                    this.toutesCartes.getPioche().remove(this.toutesCartes.getPioche().get((toutesCartes.getPioche().size() - 1)));
-                } while (this.toutesCartes.getDeckCarte().size() != 5);
+            GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().add(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().get(indice));
+            GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().remove(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().get(indice));
+        }
+        System.out.println(" Votre deck de cartes est maintenant:" + (GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte()/*.size() - nombreCarte*/) +
+                " \n Que voulez- vous faire (0 = défausse et 1 = piocher) ? ");
+        int choix = scanner.nextInt();
+        if (choix == 0) {
+            System.out.println("Combien de carte(s) voulez-vous mettre à la défausse ? ");
+            int combien = scanner.nextInt();
+            for (int j = 0; j < combien; j++) {
+                System.out.println(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte() + " est votre deck de cartes \n");
+                System.out.println(" Quel indice de carte voulez-vous mettre à la défausse ? ");
+                int indiceDefausse = scanner.nextInt();
+                GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDefausse().add(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().get(indiceDefausse));
+                GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().remove(indiceDefausse);
             }
+            GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().add(this.toutesCartes.getPioche().get(toutesCartes.getPioche().size() - 1));
+            System.out.println(" Votre deck de cartes est maintenant " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte());
+        } else if (choix == 1) {
+            do {
+                GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().add((GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().get((GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().size() - 1))));
+                GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().remove((GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().size() - 1));
+            } while (GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().size() != 5);
+            System.out.println(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte());
         }
     }
 
-    public void placerMur() {
-        System.out.println(this.toutesCartes.getDeckObstacle() + " est votre deck d'obstacles ");
+    public void placerMur(int valueOfPlayer, String[][] plateau) {
+        //TODO : Indice du deckObstacle et remove l'indice choisit...modifs
+
+        System.out.println(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckObstacle() + " est votre deck d'obstacles ");
         System.out.println(" Quel indice d'obstacle de votre deck voulez-vous placer ? ");
         int indiceObs = scanner.nextInt();
-        System.out.println(" Indiquer les coordonnées de votre mur ");
+        System.out.println(" Indiquer les coordonnées de votre mur en X");
         int posXMur = scanner.nextInt();
+        System.out.println(" Indiquer les coordonnées de votre mur en Y");
         int posYMur = scanner.nextInt();
-        if (indiceObs == 0 | indiceObs == 1 || indiceObs == 2) {
-            Plateau.plateau[posXMur][posYMur] = " obstacle marron ";
+        if (indiceObs == 0 || indiceObs == 1 || indiceObs == 2) {
+            plateau[posXMur][posYMur] = " obstacle marron ";
         } else if (indiceObs == 3 || indiceObs == 4) {
-            Plateau.plateau[posXMur][posYMur] = " obstacle de glace ";
+            plateau[posXMur][posYMur] = " obstacle de glace ";
         }
     }
 
-    public void executerProgramme() {
-        System.out.println("Votre programme est : " + this.toutesCartes.getProgramme());
-        for (int i = 0; i < this.toutesCartes.getProgramme().size(); i++) {
-            
+    public void executerProgramme(int valueOfPlayer) {
+        //TODO : Lire chaque indice du programme
+        //       switch case de string pour differencier les cartes
+        //       switch case des directions
+        //       faire les commande de chaque cartes
+        //       Plateau en param comme methode placerMur ??
+        
+        System.out.println(" Votre programme est : " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme());
+        for (int i = 0; i < GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().size(); i++) {
+
         }
     }
 
