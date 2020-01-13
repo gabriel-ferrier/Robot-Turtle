@@ -1,7 +1,5 @@
 package com.robot_turtle;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Scanner;
 
 public class Joueur {
@@ -11,8 +9,8 @@ public class Joueur {
     private int posY; // Position tortue
     private String direction = " SUD "; // Direction initiale de la tortue
 
-    private int posInitialeX; // Position initiale tortue, = posX pour apres
-    private int posInitialeY;
+    //private int posInitialeX; // Position initiale tortue, = posX pour apres
+    //private int posInitialeY;
     /*private int posFinaleX;
     private int posFinaleY;*/
     public int choixInstruction;
@@ -56,7 +54,7 @@ public class Joueur {
         this.posY = posY;
     }
 
-    public int getPosInitialeX() {
+   /* public int getPosInitialeX() {
         return posInitialeX;
     }
 
@@ -70,7 +68,7 @@ public class Joueur {
 
     public void setPosInitialeY(int posInitialeY) {
         this.posInitialeY = posInitialeY;
-    }
+    }*/
 
     public GestionCartes getToutesCartes() {
         return toutesCartes;
@@ -122,19 +120,20 @@ public class Joueur {
                     int indiceDefausse0 = scanner.nextInt();
                     GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDefausse().add(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().get(indiceDefausse0));
                     GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().remove(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().get(indiceDefausse0));
-                    System.out.println(" Votre deck de cartes est maintenant " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte());
-                    System.out.println(" Tapez 1 pour piocher ");
-                    int pioche0 = scanner.nextInt();
-                    if (pioche0 == 1){
-                        do{
-                            GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().add((GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().get((GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().size() - 1))));
-                            GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().remove((GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().size() - 1));
-                        } while (GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().size() != 5);
-                    }
-                    System.out.println(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte() + " est votre deck de cartes ");
                 }
+                System.out.println(" Votre deck de cartes est maintenant " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte());
+                System.out.println(" Tapez 1 pour piocher ");
+                int pioche0 = scanner.nextInt();
+                if (pioche0 == 1){
+                    do{
+                        GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().add((GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().get((GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().size() - 1))));
+                        GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().remove((GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().size() - 1));
+                    } while (GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().size() != 5);
+                }
+                System.out.println(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte() + " est votre deck de cartes ");
             }
         }
+        else {
         for (int i = 0; i < nombreCarte; i++) {
             System.out.println(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte() + " est votre deck de cartes \n");
             System.out.println(" Quel indice de carte voulez-vous ajouter ");
@@ -173,6 +172,7 @@ public class Joueur {
             } while (GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().size() != 5);
             System.out.println(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte() + " est votre deck de cartes ");
         }
+        }
     }
 
     public void placerMur(int valueOfPlayer, String[][] plateau) {
@@ -199,8 +199,6 @@ public class Joueur {
     }
 
     public void executerProgramme(int valueOfPlayer, String[][] plateau) {
-        GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosX(posInitialeX);
-        GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosY(posInitialeY);
         System.out.println(" Votre programme est : " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme());
         for (int i = 0; i < GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().size(); i++) {
             switch (GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().get(i)){
@@ -208,33 +206,42 @@ public class Joueur {
                     switch (direction){
                         case " SUD ":
                             plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "        0        ";
-                            GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosX(posX + 1);
-                            plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = " tortue " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).getNumero() ;
+                            GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosX(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX() + 1);
+                            plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).getNumero() ;
                             break;
                         case " EST ":
                             plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "        0        ";
-                            GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosY(posY + 1);
-                            plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = " tortue " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).getNumero() ;
+                            GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosY(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY() + 1);
+                            plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "      tortue    "  + GestionJoueurs.listeJoueurs.get(valueOfPlayer).getNumero() ;
                             break;
                         case " OUEST ":
                             plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "        0        ";
-                            GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosY(posY - 1);
-                            plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = " tortue " + GestionJoueurs.listeJoueurs.get(valueOfPlayer) ;
+                            GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosY(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY() - 1);
+                            plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "      tortue    "  + GestionJoueurs.listeJoueurs.get(valueOfPlayer).getNumero() ;
                             break;
                     }
                     break;
                 case JAUNE:
-                    direction = " EST ";
+                    setDirection(" EST ");
                     break;
                 case VIOLET:
-                    direction = " OUEST ";
+                    setDirection(" OUEST ");
+                    break;
             }
-        }
-        // TODO: faire repartir le programme a 0
-        /*for (int i = 0; i < GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().size(); i++) {
-            GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().remove(i);
-        }*/
+            //TODO: Si 2 VIOLETS : direction = SUD
+            //      Si 2 JAUNES : direction = SUD
 
+            /*for (int j = 0; i < GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().size(); j++){
+                if ( GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().get(j))
+            }
+*/
+
+
+        }
+        for (int i = 0; i < GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().size(); i++) {
+            GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().remove(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().remove(i));
+        }
+        //GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().remove()
 
     }
 

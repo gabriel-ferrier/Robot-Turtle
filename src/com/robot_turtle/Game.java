@@ -6,7 +6,7 @@ public class Game {
     //public static int manche;
 
     public static void main(String[] args) {
-        Menu menu = new Menu();
+       Menu menu = new Menu();
         nbJoueurs = menu.getNombreJoueurs();
         GestionJoueurs joueurs = new GestionJoueurs(nbJoueurs); // Lance la création des joueurs
         Plateau plateau = new Plateau();
@@ -19,7 +19,7 @@ public class Game {
             joueurActuel = joueurActuel % nbJoueurs; // Répéter pour tous les joueurs
         }
         //Joueur joueur = new Joueur(2);
-        //TourDeJeu tourDeJeu = new TourDeJeu(joueurs.getNoms(), menu.getNombreJoueurs());
+
         //Fenetre test = new Fenetre();
 
     }
