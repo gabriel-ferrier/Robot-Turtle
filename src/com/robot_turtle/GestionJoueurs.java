@@ -1,7 +1,6 @@
 package com.robot_turtle;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import com.robot_turtle.Joueur;
 
@@ -15,7 +14,6 @@ public class GestionJoueurs {
         }
         for (int i = 0; i < listeJoueurs.size(); i++) {
             listJoueurs.add("Joueur " + listeJoueurs.get(i).getNumero());
-            //System.out.println(listeJoueurs.get(i).getNumero());
         }
         System.out.println(listJoueurs);
     }

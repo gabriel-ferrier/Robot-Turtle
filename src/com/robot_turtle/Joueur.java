@@ -82,7 +82,8 @@ public class Joueur {
 
     public void instruction(Plateau plateau) {
         for (int i = 0; i < Game.nbJoueurs; i++) {
-            System.out.println(" Tour de Joueur " + GestionJoueurs.listeJoueurs.get(i).getNumero());
+            System.out.println(" Tour de Joueur " + GestionJoueurs.listeJoueurs.get(i).getNumero() +
+                    "\n 0 : Tapez 0 pour passer ou si vous avez déjà gagné");
             System.out.println(" 1 : Compléter programme " +
                     " \n 2 : Placer un mur  " +
                     " \n 3 : Exécuter programme  " +
@@ -285,6 +286,7 @@ public class Joueur {
         switch (nombreDeJoueur) {
             case 2:
                 if (GestionJoueurs.listeJoueurs.get(0).getPosX() == GestionJoueurs.listeJoueurs.get(1).getPosX() && GestionJoueurs.listeJoueurs.get(0).getPosY() == GestionJoueurs.listeJoueurs.get(1).getPosY()) {
+                    System.out.println(" Retour à la case départ, vous avez heurté une autre tortue ");
                     plateau[GestionJoueurs.listeJoueurs.get(0).getPosX()][GestionJoueurs.listeJoueurs.get(0).getPosY()] = "        0        ";
                     plateau[GestionJoueurs.listeJoueurs.get(1).getPosX()][GestionJoueurs.listeJoueurs.get(1).getPosY()] = "        0        ";
                     plateau[GestionJoueurs.listeJoueurs.get(0).getPosXInit()][GestionJoueurs.listeJoueurs.get(0).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(0).getNumero();
@@ -292,36 +294,29 @@ public class Joueur {
                 }
                 break;
             case 3:
-               for (int i = 0; i < 1; i++) {         // Parcourir une premiere fois l'ensemble de la liste des joueurs
-                    for (int j = 1; j < 2; j++) {   // Parcourir une deuxieme fois l'ensemble de la liste des joueurs
-                        for (int k = 2; k < 3; k++) {
+                //TODO: a verifier
+               for (int i = 0; i < 1; i++) {           // Imposer joueur1
+                    for (int j = 1; j < 2; j++) {      // Imposer joueur2
+                        for (int k = 2; k < 3; k++) {  // Imposer joueur3
+
                             if (GestionJoueurs.listeJoueurs.get(i).getPosX() == GestionJoueurs.listeJoueurs.get(j).getPosX() && GestionJoueurs.listeJoueurs.get(i).getPosY() == GestionJoueurs.listeJoueurs.get(j).getPosY()) {
+                                System.out.println(" Retour à la case départ, vous avez heurté une autre tortue ");
                                 plateau[GestionJoueurs.listeJoueurs.get(i).getPosX()][GestionJoueurs.listeJoueurs.get(i).getPosY()] = "        0        ";
                                 plateau[GestionJoueurs.listeJoueurs.get(j).getPosX()][GestionJoueurs.listeJoueurs.get(j).getPosY()] = "        0        ";
-                                /* GestionJoueurs.listeJoueurs.get(i).setPosX(0);
-                                GestionJoueurs.listeJoueurs.get(i).setPosY(1);
-                                GestionJoueurs.listeJoueurs.get(j).setPosX(0);
-                                GestionJoueurs.listeJoueurs.get(j).setPosY(5);*/
                                 plateau[GestionJoueurs.listeJoueurs.get(i).getPosXInit()][GestionJoueurs.listeJoueurs.get(i).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(i).getNumero();
                                 plateau[GestionJoueurs.listeJoueurs.get(j).getPosXInit()][GestionJoueurs.listeJoueurs.get(j).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(j).getNumero();
                             }
                             else if (GestionJoueurs.listeJoueurs.get(i).getPosX() == GestionJoueurs.listeJoueurs.get(k).getPosX() && GestionJoueurs.listeJoueurs.get(i).getPosY() == GestionJoueurs.listeJoueurs.get(k).getPosY()) {
+                                System.out.println(" Retour à la case départ, vous avez heurté une autre tortue ");
                                 plateau[GestionJoueurs.listeJoueurs.get(i).getPosX()][GestionJoueurs.listeJoueurs.get(i).getPosY()] = "        0        ";
                                 plateau[GestionJoueurs.listeJoueurs.get(k).getPosX()][GestionJoueurs.listeJoueurs.get(k).getPosY()] = "        0        ";
-                                /* GestionJoueurs.listeJoueurs.get(i).setPosX(0);
-                                GestionJoueurs.listeJoueurs.get(i).setPosY(1);
-                                GestionJoueurs.listeJoueurs.get(j).setPosX(0);
-                                GestionJoueurs.listeJoueurs.get(j).setPosY(5);*/
                                 plateau[GestionJoueurs.listeJoueurs.get(i).getPosXInit()][GestionJoueurs.listeJoueurs.get(i).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(i).getNumero();
-                                plateau[GestionJoueurs.listeJoueurs.get(j).getPosXInit()][GestionJoueurs.listeJoueurs.get(k).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(k).getNumero();
+                                plateau[GestionJoueurs.listeJoueurs.get(k).getPosXInit()][GestionJoueurs.listeJoueurs.get(k).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(k).getNumero();
                             }
                             else if (GestionJoueurs.listeJoueurs.get(j).getPosX() == GestionJoueurs.listeJoueurs.get(k).getPosX() && GestionJoueurs.listeJoueurs.get(j).getPosY() == GestionJoueurs.listeJoueurs.get(k).getPosY()) {
+                                System.out.println(" Retour à la case départ, vous avez heurté une autre tortue ");
                                 plateau[GestionJoueurs.listeJoueurs.get(j).getPosX()][GestionJoueurs.listeJoueurs.get(j).getPosY()] = "        0        ";
                                 plateau[GestionJoueurs.listeJoueurs.get(k).getPosX()][GestionJoueurs.listeJoueurs.get(k).getPosY()] = "        0        ";
-                                /* GestionJoueurs.listeJoueurs.get(i).setPosX(0);
-                                GestionJoueurs.listeJoueurs.get(i).setPosY(1);
-                                GestionJoueurs.listeJoueurs.get(j).setPosX(0);
-                                GestionJoueurs.listeJoueurs.get(j).setPosY(5);*/
                                 plateau[GestionJoueurs.listeJoueurs.get(j).getPosXInit()][GestionJoueurs.listeJoueurs.get(j).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(j).getNumero();
                                 plateau[GestionJoueurs.listeJoueurs.get(k).getPosXInit()][GestionJoueurs.listeJoueurs.get(k).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(k).getNumero();
                             }
@@ -329,15 +324,65 @@ public class Joueur {
 
                     }
                 }
-
-
-
-
                 break;
             case 4:
+                for (int i = 0; i < 1; i++) {               // Imposer joueur1
+                    for (int j = 1; j < 2; j++) {           // Imposer joueur2
+                        for (int k = 2; k < 3; k++) {       // Imposer joueur3
+                            for (int l = 3; l < 4 ; l++) {  // Imposer joueur4
+
+                                if (GestionJoueurs.listeJoueurs.get(i).getPosX() == GestionJoueurs.listeJoueurs.get(j).getPosX() && GestionJoueurs.listeJoueurs.get(i).getPosY() == GestionJoueurs.listeJoueurs.get(j).getPosY()) {
+                                    System.out.println(" Retour à la case départ, vous avez heurté une autre tortue ");
+                                    plateau[GestionJoueurs.listeJoueurs.get(i).getPosX()][GestionJoueurs.listeJoueurs.get(i).getPosY()] = "        0        ";
+                                    plateau[GestionJoueurs.listeJoueurs.get(j).getPosX()][GestionJoueurs.listeJoueurs.get(j).getPosY()] = "        0        ";
+                                    plateau[GestionJoueurs.listeJoueurs.get(i).getPosXInit()][GestionJoueurs.listeJoueurs.get(i).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(i).getNumero();
+                                    plateau[GestionJoueurs.listeJoueurs.get(j).getPosXInit()][GestionJoueurs.listeJoueurs.get(j).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(j).getNumero();
+                                }
+                                else if (GestionJoueurs.listeJoueurs.get(i).getPosX() == GestionJoueurs.listeJoueurs.get(k).getPosX() && GestionJoueurs.listeJoueurs.get(i).getPosY() == GestionJoueurs.listeJoueurs.get(k).getPosY()) {
+                                    System.out.println(" Retour à la case départ, vous avez heurté une autre tortue ");
+                                    plateau[GestionJoueurs.listeJoueurs.get(i).getPosX()][GestionJoueurs.listeJoueurs.get(i).getPosY()] = "        0        ";
+                                    plateau[GestionJoueurs.listeJoueurs.get(k).getPosX()][GestionJoueurs.listeJoueurs.get(k).getPosY()] = "        0        ";
+                                    plateau[GestionJoueurs.listeJoueurs.get(i).getPosXInit()][GestionJoueurs.listeJoueurs.get(i).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(i).getNumero();
+                                    plateau[GestionJoueurs.listeJoueurs.get(k).getPosXInit()][GestionJoueurs.listeJoueurs.get(k).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(k).getNumero();
+                                }
+                                else if (GestionJoueurs.listeJoueurs.get(i).getPosX() == GestionJoueurs.listeJoueurs.get(l).getPosX() && GestionJoueurs.listeJoueurs.get(i).getPosY() == GestionJoueurs.listeJoueurs.get(l).getPosY()) {
+                                    System.out.println(" Retour à la case départ, vous avez heurté une autre tortue ");
+                                    plateau[GestionJoueurs.listeJoueurs.get(i).getPosX()][GestionJoueurs.listeJoueurs.get(i).getPosY()] = "        0        ";
+                                    plateau[GestionJoueurs.listeJoueurs.get(l).getPosX()][GestionJoueurs.listeJoueurs.get(l).getPosY()] = "        0        ";
+                                    plateau[GestionJoueurs.listeJoueurs.get(i).getPosXInit()][GestionJoueurs.listeJoueurs.get(i).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(i).getNumero();
+                                    plateau[GestionJoueurs.listeJoueurs.get(l).getPosXInit()][GestionJoueurs.listeJoueurs.get(l).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(l).getNumero();
+                                }
+                                else if (GestionJoueurs.listeJoueurs.get(j).getPosX() == GestionJoueurs.listeJoueurs.get(k).getPosX() && GestionJoueurs.listeJoueurs.get(j).getPosY() == GestionJoueurs.listeJoueurs.get(k).getPosY()) {
+                                    System.out.println(" Retour à la case départ, vous avez heurté une autre tortue ");
+                                    plateau[GestionJoueurs.listeJoueurs.get(j).getPosX()][GestionJoueurs.listeJoueurs.get(j).getPosY()] = "        0        ";
+                                    plateau[GestionJoueurs.listeJoueurs.get(k).getPosX()][GestionJoueurs.listeJoueurs.get(k).getPosY()] = "        0        ";
+                                    plateau[GestionJoueurs.listeJoueurs.get(j).getPosXInit()][GestionJoueurs.listeJoueurs.get(j).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(j).getNumero();
+                                    plateau[GestionJoueurs.listeJoueurs.get(k).getPosXInit()][GestionJoueurs.listeJoueurs.get(k).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(k).getNumero();
+                                }
+                                else if (GestionJoueurs.listeJoueurs.get(j).getPosX() == GestionJoueurs.listeJoueurs.get(l).getPosX() && GestionJoueurs.listeJoueurs.get(j).getPosY() == GestionJoueurs.listeJoueurs.get(l).getPosY()) {
+                                    System.out.println(" Retour à la case départ, vous avez heurté une autre tortue ");
+                                    plateau[GestionJoueurs.listeJoueurs.get(j).getPosX()][GestionJoueurs.listeJoueurs.get(j).getPosY()] = "        0        ";
+                                    plateau[GestionJoueurs.listeJoueurs.get(l).getPosX()][GestionJoueurs.listeJoueurs.get(l).getPosY()] = "        0        ";
+                                    plateau[GestionJoueurs.listeJoueurs.get(j).getPosXInit()][GestionJoueurs.listeJoueurs.get(j).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(j).getNumero();
+                                    plateau[GestionJoueurs.listeJoueurs.get(l).getPosXInit()][GestionJoueurs.listeJoueurs.get(l).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(l).getNumero();
+                                }
+                                else if (GestionJoueurs.listeJoueurs.get(k).getPosX() == GestionJoueurs.listeJoueurs.get(l).getPosX() && GestionJoueurs.listeJoueurs.get(k).getPosY() == GestionJoueurs.listeJoueurs.get(l).getPosY()) {
+                                    System.out.println(" Retour à la case départ, vous avez heurté une autre tortue ");
+                                    plateau[GestionJoueurs.listeJoueurs.get(k).getPosX()][GestionJoueurs.listeJoueurs.get(k).getPosY()] = "        0        ";
+                                    plateau[GestionJoueurs.listeJoueurs.get(l).getPosX()][GestionJoueurs.listeJoueurs.get(l).getPosY()] = "        0        ";
+                                    plateau[GestionJoueurs.listeJoueurs.get(k).getPosXInit()][GestionJoueurs.listeJoueurs.get(k).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(k).getNumero();
+                                    plateau[GestionJoueurs.listeJoueurs.get(l).getPosXInit()][GestionJoueurs.listeJoueurs.get(l).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(l).getNumero();
+                                }
+                            }
+                        }
+
+                    }
+                }
                 break;
         }
     }
+
+    //TODO: méthode collision si joueur out of bands
 
 
 
@@ -355,7 +400,7 @@ public class Joueur {
                            " \n\n Vous avez gagné la partie !!!!! \n");
                 }
                break;
-            case 3: //TODO: Arreter le tour du premier joueur a trouver joyau et deuxieme...
+            case 3:
                 int positionXJoyau1 = GestionJoyaux.listeJoyaux.get(0).getPosXJoyau();
                 int positionYJoyau1 = GestionJoyaux.listeJoyaux.get(0).getPosYJoyau();
                 int positionXJoyau2 = GestionJoyaux.listeJoyaux.get(1).getPosXJoyau();

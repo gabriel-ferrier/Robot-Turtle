@@ -3,9 +3,7 @@ package com.robot_turtle;
 public class Game {
 
     public static int nbJoueurs;
-    //public static Boolean test = true;
     public static int finDuJeu = 0;
-
 
     public static void main(String[] args) {
         Menu menu = new Menu();
@@ -18,22 +16,16 @@ public class Game {
 
         int joueurActuel = 0;
         while (finDuJeu == 0) {
-                joueurs.getListeJoueurs().get(joueurActuel).instruction(plateau); // Lance les tours de jeu
-                joueurActuel++;
-                joueurActuel = joueurActuel % nbJoueurs; // Répéter pour tous les joueurs
-            if (finDuJeu == 1){
+            joueurs.getListeJoueurs().get(joueurActuel).instruction(plateau); // Lance les tours de jeu
+            joueurActuel++;
+            joueurActuel = joueurActuel % nbJoueurs; // Répéter pour tous les joueurs
+            if (finDuJeu == 1) {
                 break;
             }
-           }
-
-
-
-
-
         }
-        //Joueur joueur = new Joueur(2);
-
-        //Fenetre test = new Fenetre();
-
     }
+    //Joueur joueur = new Joueur(2);
+
+    //Fenetre test = new Fenetre();
+}
 
