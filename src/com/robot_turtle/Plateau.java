@@ -40,9 +40,9 @@ public class Plateau {
             case 2 :
                 GestionJoyaux.listeJoyaux.get(0).setPosXJoyau(7);
                 GestionJoyaux.listeJoyaux.get(0).setPosYJoyau(3);
-                GestionJoueurs.listeJoueurs.get(0).setPosX(7);
+                GestionJoueurs.listeJoueurs.get(0).setPosX(0);
                 GestionJoueurs.listeJoueurs.get(0).setPosY(1);
-                GestionJoueurs.listeJoueurs.get(1).setPosX(7);
+                GestionJoueurs.listeJoueurs.get(1).setPosX(0);
                 GestionJoueurs.listeJoueurs.get(1).setPosY(5);
                 System.out.println("Voici votre plateau de jeu \n");
                 plateau[GestionJoueurs.listeJoueurs.get(0).getPosX()][GestionJoueurs.listeJoueurs.get(0).getPosY()] = "      tortue 1   ";
