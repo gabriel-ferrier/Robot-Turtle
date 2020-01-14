@@ -6,18 +6,30 @@ public class Joyau {
     private int posXJoyaux;
     private int posYJoyaux;
 
-    public int getPosXJoyaux() { return posXJoyaux; }
-
-    public void setPosXJoyaux(int posXJoyaux) { this.posXJoyaux = posXJoyaux; }
-
-    public int getPosYJoyaux() { return posYJoyaux; }
-
-    public void setPosYJoyaux(int posYJoyaux) { this.posYJoyaux = posYJoyaux; }
-
-
-    public Joyau( int numeroJoyau){
+    public Joyau(int numeroJoyau) {
         this.numeroJoyau = numeroJoyau;
-        }
+    }
+
+
+    public int getNumeroJoyau() {
+        return numeroJoyau;
+    }
+
+    public int getPosXJoyau() {
+        return posXJoyaux;
+    }
+
+    public void setPosXJoyau(int posXJoyaux) {
+        this.posXJoyaux = posXJoyaux;
+    }
+
+    public int getPosYJoyau() {
+        return posYJoyaux;
+    }
+
+    public void setPosYJoyau(int posYJoyaux) {
+        this.posYJoyaux = posYJoyaux;
+    }
 
 }
 

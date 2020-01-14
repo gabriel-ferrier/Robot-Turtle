@@ -6,9 +6,10 @@ public class Game {
     //public static int manche;
 
     public static void main(String[] args) {
-       Menu menu = new Menu();
+        Menu menu = new Menu();
         nbJoueurs = menu.getNombreJoueurs();
         GestionJoueurs joueurs = new GestionJoueurs(nbJoueurs); // Lance la création des joueurs
+        GestionJoyaux joyaux = new GestionJoyaux(nbJoueurs); // Lance la création des joyaux
         Plateau plateau = new Plateau();
         plateau.afficherPlateauInit(nbJoueurs); // Affiche plateau initial
 
