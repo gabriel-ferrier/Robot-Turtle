@@ -8,6 +8,9 @@ public class Joueur {
     private int numero;
     private int posX; // Position tortue
     private int posY; // Position tortue
+    private int posXInit; // Position tortue initiale
+    private int posYInit; // Position tortue initiale
+
     private String direction = " SUD "; // Direction initiale de la tortue
     public int choixInstruction;
     private GestionCartes toutesCartes; // Avoir accès aux jeux de cartes de chaque joueur
@@ -21,6 +24,13 @@ public class Joueur {
     }
 
 
+    public int getPosXInit() { return posXInit; }
+
+    public void setPosXInit(int posXInit) { this.posXInit = posXInit; }
+
+    public int getPosYInit() { return posYInit; }
+
+    public void setPosYInit(int posYInit) { this.posYInit = posYInit; }
 
     public String getDirection() { return direction; }
 
@@ -88,7 +98,7 @@ public class Joueur {
                     break;
                 case 3:
                     executerProgramme(i,plateau.getPlateau());
-                    //plateau.afficherPlateau();
+                    collision2Joueurs(Game.nbJoueurs,plateau.getPlateau());
                     collisionFinale(Game.nbJoueurs, i ,plateau.getPlateau());
                     plateau.afficherPlateau();
                     break;
@@ -197,11 +207,11 @@ public class Joueur {
     }
 
     public void executerProgramme(int valueOfPlayer,  String[][] plateau) {
-        //TODO: tester avec nouvelles directions
         System.out.println(" Votre programme est : " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme());
+
         for (int i = 0; i < GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().size(); i++) {
                 switch (GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().get(i)) {
-                    case BLEU:
+                    case BLEU: // Le joueur souhaite avancer
                         switch (GestionJoueurs.listeJoueurs.get(valueOfPlayer).getDirection()) {
                             case " SUD ":
                                 plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "        0        ";
@@ -225,50 +235,111 @@ public class Joueur {
                                 break;
                         }
                         break;
-                    case JAUNE:
+                    case JAUNE:  // Le joueur souhaite faire un decalage de 90° vers la gauche
                         switch (GestionJoueurs.listeJoueurs.get(valueOfPlayer).getDirection()) {
                             case " SUD ":
-                                GestionJoueurs.listeJoueurs.get(valueOfPlayer).setDirection(" OUEST ");
+                                GestionJoueurs.listeJoueurs.get(valueOfPlayer).setDirection(" OUEST ");       // Si direction = SUD : prochaine direction = OUEST
                                 break;
                             case " NORD ":
-                                GestionJoueurs.listeJoueurs.get(valueOfPlayer).setDirection(" EST ");
+                                GestionJoueurs.listeJoueurs.get(valueOfPlayer).setDirection(" EST ");       // Si direction = NORD : prochaine direction = EST
                                 break;
                             case " EST ":
-                                GestionJoueurs.listeJoueurs.get(valueOfPlayer).setDirection(" SUD ");
+                                GestionJoueurs.listeJoueurs.get(valueOfPlayer).setDirection(" SUD ");       // Si direction = EST : prochaine direction = SUD
                                 break;
                             case " OUEST ":
-                                GestionJoueurs.listeJoueurs.get(valueOfPlayer).setDirection(" NORD ");
+                                GestionJoueurs.listeJoueurs.get(valueOfPlayer).setDirection(" NORD ");       // Si direction = OUEST : prochaine direction = NORD
                                 break;
                         }
                         break;
-                    case VIOLET:
+                    case VIOLET:  // Le joueur souhaite faire un ecalage de 90° vers la droite
                         switch (GestionJoueurs.listeJoueurs.get(valueOfPlayer).getDirection()) {
                             case " SUD ":
-                                GestionJoueurs.listeJoueurs.get(valueOfPlayer).setDirection(" EST ");
+                                GestionJoueurs.listeJoueurs.get(valueOfPlayer).setDirection(" EST ");       // Si direction = SUD : prochaine direction = EST
                                 break;
                             case " NORD ":
-                                GestionJoueurs.listeJoueurs.get(valueOfPlayer).setDirection(" OUEST ");
+                                GestionJoueurs.listeJoueurs.get(valueOfPlayer).setDirection(" OUEST ");     // Si direction = NORD : prochaine direction = EST
                                 break;
                             case " EST ":
-                                GestionJoueurs.listeJoueurs.get(valueOfPlayer).setDirection(" NORD ");
+                                GestionJoueurs.listeJoueurs.get(valueOfPlayer).setDirection(" NORD ");      // Si direction = EST : prochaine direction = EST
                                 break;
                             case " OUEST ":
-                                GestionJoueurs.listeJoueurs.get(valueOfPlayer).setDirection(" SUD ");
+                                GestionJoueurs.listeJoueurs.get(valueOfPlayer).setDirection(" SUD ");       // Si direction = OUEST : prochaine direction = EST
                                 break;
                         }
                         break;
                 }
         }
 
+        // Réinitialiser le programme de chaque joueurs après exécution
         for (int i = 0; i < GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().size(); i++){
             do{
                 GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDefausse().add(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().get(i));
-                //System.out.println(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDefausse());
                 GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().remove(i);
             }while(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().size() != 0);
         }
 
     }
+
+
+    public void collision2Joueurs(int nombreDeJoueur, String [][] plateau) {
+        switch (nombreDeJoueur) {
+            case 2:
+                if (GestionJoueurs.listeJoueurs.get(0).getPosX() == GestionJoueurs.listeJoueurs.get(1).getPosX() && GestionJoueurs.listeJoueurs.get(0).getPosY() == GestionJoueurs.listeJoueurs.get(1).getPosY()) {
+                    plateau[GestionJoueurs.listeJoueurs.get(0).getPosX()][GestionJoueurs.listeJoueurs.get(0).getPosY()] = "        0        ";
+                    plateau[GestionJoueurs.listeJoueurs.get(1).getPosX()][GestionJoueurs.listeJoueurs.get(1).getPosY()] = "        0        ";
+                    plateau[GestionJoueurs.listeJoueurs.get(0).getPosXInit()][GestionJoueurs.listeJoueurs.get(0).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(0).getNumero();
+                    plateau[GestionJoueurs.listeJoueurs.get(1).getPosXInit()][GestionJoueurs.listeJoueurs.get(1).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(1).getNumero();
+                }
+                break;
+            case 3:
+               for (int i = 0; i < 1; i++) {         // Parcourir une premiere fois l'ensemble de la liste des joueurs
+                    for (int j = 1; j < 2; j++) {   // Parcourir une deuxieme fois l'ensemble de la liste des joueurs
+                        for (int k = 2; k < 3; k++) {
+                            if (GestionJoueurs.listeJoueurs.get(i).getPosX() == GestionJoueurs.listeJoueurs.get(j).getPosX() && GestionJoueurs.listeJoueurs.get(i).getPosY() == GestionJoueurs.listeJoueurs.get(j).getPosY()) {
+                                plateau[GestionJoueurs.listeJoueurs.get(i).getPosX()][GestionJoueurs.listeJoueurs.get(i).getPosY()] = "        0        ";
+                                plateau[GestionJoueurs.listeJoueurs.get(j).getPosX()][GestionJoueurs.listeJoueurs.get(j).getPosY()] = "        0        ";
+                                /* GestionJoueurs.listeJoueurs.get(i).setPosX(0);
+                                GestionJoueurs.listeJoueurs.get(i).setPosY(1);
+                                GestionJoueurs.listeJoueurs.get(j).setPosX(0);
+                                GestionJoueurs.listeJoueurs.get(j).setPosY(5);*/
+                                plateau[GestionJoueurs.listeJoueurs.get(i).getPosXInit()][GestionJoueurs.listeJoueurs.get(i).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(i).getNumero();
+                                plateau[GestionJoueurs.listeJoueurs.get(j).getPosXInit()][GestionJoueurs.listeJoueurs.get(j).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(j).getNumero();
+                            }
+                            else if (GestionJoueurs.listeJoueurs.get(i).getPosX() == GestionJoueurs.listeJoueurs.get(k).getPosX() && GestionJoueurs.listeJoueurs.get(i).getPosY() == GestionJoueurs.listeJoueurs.get(k).getPosY()) {
+                                plateau[GestionJoueurs.listeJoueurs.get(i).getPosX()][GestionJoueurs.listeJoueurs.get(i).getPosY()] = "        0        ";
+                                plateau[GestionJoueurs.listeJoueurs.get(k).getPosX()][GestionJoueurs.listeJoueurs.get(k).getPosY()] = "        0        ";
+                                /* GestionJoueurs.listeJoueurs.get(i).setPosX(0);
+                                GestionJoueurs.listeJoueurs.get(i).setPosY(1);
+                                GestionJoueurs.listeJoueurs.get(j).setPosX(0);
+                                GestionJoueurs.listeJoueurs.get(j).setPosY(5);*/
+                                plateau[GestionJoueurs.listeJoueurs.get(i).getPosXInit()][GestionJoueurs.listeJoueurs.get(i).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(i).getNumero();
+                                plateau[GestionJoueurs.listeJoueurs.get(j).getPosXInit()][GestionJoueurs.listeJoueurs.get(k).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(k).getNumero();
+                            }
+                            else if (GestionJoueurs.listeJoueurs.get(j).getPosX() == GestionJoueurs.listeJoueurs.get(k).getPosX() && GestionJoueurs.listeJoueurs.get(j).getPosY() == GestionJoueurs.listeJoueurs.get(k).getPosY()) {
+                                plateau[GestionJoueurs.listeJoueurs.get(j).getPosX()][GestionJoueurs.listeJoueurs.get(j).getPosY()] = "        0        ";
+                                plateau[GestionJoueurs.listeJoueurs.get(k).getPosX()][GestionJoueurs.listeJoueurs.get(k).getPosY()] = "        0        ";
+                                /* GestionJoueurs.listeJoueurs.get(i).setPosX(0);
+                                GestionJoueurs.listeJoueurs.get(i).setPosY(1);
+                                GestionJoueurs.listeJoueurs.get(j).setPosX(0);
+                                GestionJoueurs.listeJoueurs.get(j).setPosY(5);*/
+                                plateau[GestionJoueurs.listeJoueurs.get(j).getPosXInit()][GestionJoueurs.listeJoueurs.get(j).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(j).getNumero();
+                                plateau[GestionJoueurs.listeJoueurs.get(k).getPosXInit()][GestionJoueurs.listeJoueurs.get(k).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(k).getNumero();
+                            }
+                        }
+
+                    }
+                }
+
+
+
+
+                break;
+            case 4:
+                break;
+        }
+    }
+
+
 
 
     public void collisionFinale(int nombreDeJoueur, int valueOfPlayer, String [][] plateau){
@@ -282,7 +353,6 @@ public class Joueur {
                    plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "     joyau " + GestionJoyaux.listeJoyaux.get(0).getNumeroJoyau() + "     ";
                    System.out.println(" \n Bravo Joueur " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).getNumero() + " vous avez atteint le joyau en 1er " +
                            " \n\n Vous avez gagné la partie !!!!! \n");
-                   //GestionJoueurs.listeJoueurs.remove(GestionJoueurs.listeJoueurs.get(valueOfPlayer));
                 }
                break;
             case 3: //TODO: Arreter le tour du premier joueur a trouver joyau et deuxieme...
@@ -331,9 +401,14 @@ public class Joueur {
                     System.out.println(" \n Bravo Joueur " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).getNumero() + " vous avez atteint le joyau " );
                     //GestionJoueurs.listeJoueurs.remove(GestionJoueurs.listeJoueurs.get(valueOfPlayer));
                 }
+                break;
         }
     }
 
-}
 
+
+
+
+
+}
 

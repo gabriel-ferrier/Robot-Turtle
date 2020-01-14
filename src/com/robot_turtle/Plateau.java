@@ -38,37 +38,61 @@ public class Plateau {
         }
         switch (nb){
             case 2 :
+                //  Positions du joyau
                 GestionJoyaux.listeJoyaux.get(0).setPosXJoyau(7);
                 GestionJoyaux.listeJoyaux.get(0).setPosYJoyau(3);
-                GestionJoueurs.listeJoueurs.get(0).setPosX(0);
-                GestionJoueurs.listeJoueurs.get(0).setPosY(1);
-                GestionJoueurs.listeJoueurs.get(1).setPosX(0);
-                GestionJoueurs.listeJoueurs.get(1).setPosY(5);
+
+                // Positions initiales des joueurs
+                GestionJoueurs.listeJoueurs.get(0).setPosXInit(0);
+                GestionJoueurs.listeJoueurs.get(0).setPosYInit(1);
+                GestionJoueurs.listeJoueurs.get(1).setPosXInit(0);
+                GestionJoueurs.listeJoueurs.get(1).setPosYInit(5);
+
+                // Initialisation des posistions du joueurs à ces positions initiales pour pouvoir travailler dessus apres
+                GestionJoueurs.listeJoueurs.get(0).setPosX(GestionJoueurs.listeJoueurs.get(0).getPosXInit());
+                GestionJoueurs.listeJoueurs.get(0).setPosY(GestionJoueurs.listeJoueurs.get(0).getPosYInit());
+                GestionJoueurs.listeJoueurs.get(1).setPosX(GestionJoueurs.listeJoueurs.get(1).getPosXInit());
+                GestionJoueurs.listeJoueurs.get(1).setPosY(GestionJoueurs.listeJoueurs.get(1).getPosYInit());
+
                 System.out.println("Voici votre plateau de jeu \n");
-                plateau[GestionJoueurs.listeJoueurs.get(0).getPosX()][GestionJoueurs.listeJoueurs.get(0).getPosY()] = "      tortue 1   ";
-                plateau[GestionJoueurs.listeJoueurs.get(1).getPosX()][GestionJoueurs.listeJoueurs.get(1).getPosY()] = "      tortue 2   ";
+                plateau[GestionJoueurs.listeJoueurs.get(0).getPosXInit()][GestionJoueurs.listeJoueurs.get(0).getPosYInit()] = "      tortue 1   ";
+                plateau[GestionJoueurs.listeJoueurs.get(1).getPosXInit()][GestionJoueurs.listeJoueurs.get(1).getPosYInit()] = "      tortue 2   ";
                 plateau[GestionJoyaux.listeJoyaux.get(0).getPosXJoyau()][GestionJoyaux.listeJoyaux.get(0).getPosYJoyau()] = "     joyau " + GestionJoyaux.listeJoyaux.get(0).getNumeroJoyau() + "     ";
-                for (String[] ligne : getPlateau()) { // Parcourre toute les lignes du tableau
-                System.out.println(Arrays.toString(ligne)+"\n"); // Affiche ligne par ligne le plateau
+                for (String[] ligne : getPlateau()) {               // Parcourrir toute les lignes du tableau
+                System.out.println(Arrays.toString(ligne)+"\n");    // Afficher ligne par ligne le plateau
             }
                 break;
             case 3 :
+                // Positions des joyaux
                 GestionJoyaux.listeJoyaux.get(0).setPosXJoyau(7);
                 GestionJoyaux.listeJoyaux.get(0).setPosYJoyau(0);
                 GestionJoyaux.listeJoyaux.get(1).setPosXJoyau(7);
                 GestionJoyaux.listeJoyaux.get(1).setPosYJoyau(3);
                 GestionJoyaux.listeJoyaux.get(2).setPosXJoyau(7);
                 GestionJoyaux.listeJoyaux.get(2).setPosYJoyau(7);
-                GestionJoueurs.listeJoueurs.get(0).setPosX(0);
-                GestionJoueurs.listeJoueurs.get(0).setPosY(0);
-                GestionJoueurs.listeJoueurs.get(1).setPosX(0);
-                GestionJoueurs.listeJoueurs.get(1).setPosY(3);
-                GestionJoueurs.listeJoueurs.get(2).setPosY(0);
-                GestionJoueurs.listeJoueurs.get(2).setPosY(7);
+
+                // Positions initiales des joueurs
+                GestionJoueurs.listeJoueurs.get(0).setPosXInit(0);
+                GestionJoueurs.listeJoueurs.get(0).setPosYInit(0);
+                GestionJoueurs.listeJoueurs.get(1).setPosXInit(0);
+                GestionJoueurs.listeJoueurs.get(1).setPosYInit(3);
+                GestionJoueurs.listeJoueurs.get(2).setPosXInit(0);
+                GestionJoueurs.listeJoueurs.get(2).setPosYInit(7);
+
+                // Initialisation des posistions du joueurs à ces positions initiales pour pouvoir travailler dessus apres
+                GestionJoueurs.listeJoueurs.get(0).setPosX(GestionJoueurs.listeJoueurs.get(0).getPosXInit());
+                GestionJoueurs.listeJoueurs.get(0).setPosY(GestionJoueurs.listeJoueurs.get(0).getPosYInit());
+                GestionJoueurs.listeJoueurs.get(1).setPosX(GestionJoueurs.listeJoueurs.get(1).getPosXInit());
+                GestionJoueurs.listeJoueurs.get(1).setPosY(GestionJoueurs.listeJoueurs.get(1).getPosYInit());
+                GestionJoueurs.listeJoueurs.get(2).setPosX(GestionJoueurs.listeJoueurs.get(2).getPosXInit());
+                GestionJoueurs.listeJoueurs.get(2).setPosY(GestionJoueurs.listeJoueurs.get(2).getPosYInit());
+
+
+
                 System.out.println("Voici votre plateau de jeu \n");
-                plateau[GestionJoueurs.listeJoueurs.get(0).getPosX()][GestionJoueurs.listeJoueurs.get(0).getPosY()] = "      tortue 1   ";
-                plateau[GestionJoueurs.listeJoueurs.get(1).getPosX()][GestionJoueurs.listeJoueurs.get(1).getPosY()] = "      tortue 2   ";
-                plateau[GestionJoueurs.listeJoueurs.get(2).getPosX()][GestionJoueurs.listeJoueurs.get(2).getPosY()] = "      tortue 3   ";
+                plateau[GestionJoueurs.listeJoueurs.get(0).getPosXInit()][GestionJoueurs.listeJoueurs.get(0).getPosYInit()] = "      tortue 1   ";
+                plateau[GestionJoueurs.listeJoueurs.get(1).getPosXInit()][GestionJoueurs.listeJoueurs.get(1).getPosYInit()] = "      tortue 2   ";
+                plateau[GestionJoueurs.listeJoueurs.get(2).getPosXInit()][GestionJoueurs.listeJoueurs.get(2).getPosYInit()] = "      tortue 3   ";
                 plateau[GestionJoyaux.listeJoyaux.get(0).getPosXJoyau()][GestionJoyaux.listeJoyaux.get(0).getPosYJoyau()] = "     joyau " + GestionJoyaux.listeJoyaux.get(0).getNumeroJoyau() + "     ";
                 plateau[GestionJoyaux.listeJoyaux.get(1).getPosXJoyau()][GestionJoyaux.listeJoyaux.get(1).getPosYJoyau()] = "     joyau " + GestionJoyaux.listeJoyaux.get(1).getNumeroJoyau() + "     ";
                 plateau[GestionJoyaux.listeJoyaux.get(2).getPosXJoyau()][GestionJoyaux.listeJoyaux.get(2).getPosYJoyau()] = "     joyau " + GestionJoyaux.listeJoyaux.get(2).getNumeroJoyau() + "     ";
