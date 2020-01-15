@@ -7,8 +7,8 @@ public class Menu {
     public int nombreJoueurs;
 
     public Menu() {
-        System.out.println("Bienvenue dans le jeu ROBOT TURTLE !!!\n" +
-                "Pour commencer veuillez indiquer combien de joueurs seront de la partie (2,3 ou 4) ");
+        System.out.println("         ****** Bienvenue dans le jeu ROBOT TURTLE !!! ******         \n" +
+                "Pour commencer veuillez indiquer combien de joueurs seront de la partie (2,3 ou 4) \n");
         nombreJoueurs = scanner.nextInt();
     }
 

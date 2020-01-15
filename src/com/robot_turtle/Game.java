@@ -16,10 +16,13 @@ public class Game {
 
         int joueurActuel = 0;
         while (finDuJeu == 0) {
-            joueurs.getListeJoueurs().get(joueurActuel).instruction(plateau); // Lance les tours de jeu
-            joueurActuel++;
-            joueurActuel = joueurActuel % nbJoueurs; // Répéter pour tous les joueurs
+            do {
+                joueurs.getListeJoueurs().get(joueurActuel).instruction(plateau); // Lance les tours de jeu
+                joueurActuel++;
+                joueurActuel = joueurActuel % nbJoueurs; // Répéter pour tous les joueurs
+            }while (finDuJeu == 0);
             if (finDuJeu == 1) {
+                System.out.println(" ***** FIN DU JEU ***** ");
                 break;
             }
         }

@@ -56,7 +56,10 @@ public class Plateau {
                 GestionJoueurs.listeJoueurs.get(1).setPosX(GestionJoueurs.listeJoueurs.get(1).getPosXInit());
                 GestionJoueurs.listeJoueurs.get(1).setPosY(GestionJoueurs.listeJoueurs.get(1).getPosYInit());
 
-                System.out.println("Voici votre plateau de jeu \n");
+                System.out.println("Chaque joueur se voit attribué la tortue de son numéro. " +
+                        "\nAttention, il est FORMELLEMENT INTERDIT de bloquer le chemin à un autre joueur lorsque vous placé un obstacle !! ");
+                System.out.println("Voici votre plateau de jeu :\n");
+
                 // Positionnement des tortues
                 plateau[GestionJoueurs.listeJoueurs.get(0).getPosXInit()][GestionJoueurs.listeJoueurs.get(0).getPosYInit()] = "      tortue 1   ";
                 plateau[GestionJoueurs.listeJoueurs.get(1).getPosXInit()][GestionJoueurs.listeJoueurs.get(1).getPosYInit()] = "      tortue 2   ";
@@ -76,12 +79,12 @@ public class Plateau {
                 GestionJoyaux.listeJoyaux.get(2).setPosYJoyau(7);
 
                 // Positions initiales des joueurs
-                GestionJoueurs.listeJoueurs.get(0).setPosXInit(0);
-                GestionJoueurs.listeJoueurs.get(0).setPosYInit(0);
+                GestionJoueurs.listeJoueurs.get(0).setPosXInit(5);
+                GestionJoueurs.listeJoueurs.get(0).setPosYInit(4);
                 GestionJoueurs.listeJoueurs.get(1).setPosXInit(5);
                 GestionJoueurs.listeJoueurs.get(1).setPosYInit(3);
-                GestionJoueurs.listeJoueurs.get(2).setPosXInit(0);
-                GestionJoueurs.listeJoueurs.get(2).setPosYInit(7);
+                GestionJoueurs.listeJoueurs.get(2).setPosXInit(5);
+                GestionJoueurs.listeJoueurs.get(2).setPosYInit(5);
 
                 // Initialisation des posistions des joueurs à ses positions initiales pour pouvoir travailler dessus apres
                 GestionJoueurs.listeJoueurs.get(0).setPosX(GestionJoueurs.listeJoueurs.get(0).getPosXInit());
@@ -91,8 +94,10 @@ public class Plateau {
                 GestionJoueurs.listeJoueurs.get(2).setPosX(GestionJoueurs.listeJoueurs.get(2).getPosXInit());
                 GestionJoueurs.listeJoueurs.get(2).setPosY(GestionJoueurs.listeJoueurs.get(2).getPosYInit());
 
+                System.out.println("Chaque joueur se voit attribué la tortue de son numéro. " +
+                        "\nAttention, il est FORMELLEMENT INTERDIT de bloquer le chemin à un autre joueur lorsque vous placé un obstacle !! ");
+                System.out.println("Voici votre plateau de jeu :\n");
 
-                System.out.println("Voici votre plateau de jeu \n");
                 // Positionnement des tortues
                 plateau[GestionJoueurs.listeJoueurs.get(0).getPosXInit()][GestionJoueurs.listeJoueurs.get(0).getPosYInit()] = "      tortue 1   ";
                 plateau[GestionJoueurs.listeJoueurs.get(1).getPosXInit()][GestionJoueurs.listeJoueurs.get(1).getPosYInit()] = "      tortue 2   ";
@@ -132,7 +137,10 @@ public class Plateau {
                 GestionJoueurs.listeJoueurs.get(3).setPosX(GestionJoueurs.listeJoueurs.get(3).getPosXInit());
                 GestionJoueurs.listeJoueurs.get(3).setPosY(GestionJoueurs.listeJoueurs.get(3).getPosYInit());
 
-                System.out.println("Voici votre plateau de jeu \n");
+                System.out.println("Chaque joueur se voit attribué la tortue de son numéro. " +
+                        "\nAttention, il est FORMELLEMENT INTERDIT de bloquer le chemin à un autre joueur lorsque vous placé un obstacle !! ");
+                System.out.println("Voici votre plateau de jeu :\n");
+
                 // Positionnement des tortues
                 plateau[GestionJoueurs.listeJoueurs.get(0).getPosXInit()][GestionJoueurs.listeJoueurs.get(0).getPosYInit()] = "      tortue 1   ";
                 plateau[GestionJoueurs.listeJoueurs.get(1).getPosXInit()][GestionJoueurs.listeJoueurs.get(1).getPosYInit()] = "      tortue 2   ";
