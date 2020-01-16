@@ -61,11 +61,15 @@ public class Plateau {
                         "\nATTENTION, pour gagner vous devez vous rendre EXACTEMENT sur un joyau");
                 System.out.println("Voici votre plateau de jeu :\n");
 
+                // Positionnement de la colonne d'obstacle marrons
+                for (int i = 0; i < 8; i++) {
+                    plateau[i][7] = "mur en pierre";
+                }
                 // Positionnement des tortues
-                plateau[GestionJoueurs.listeJoueurs.get(0).getPosXInit()][GestionJoueurs.listeJoueurs.get(0).getPosYInit()] = "      tortue 1   ";
-                plateau[GestionJoueurs.listeJoueurs.get(1).getPosXInit()][GestionJoueurs.listeJoueurs.get(1).getPosYInit()] = "      tortue 2   ";
+                plateau[GestionJoueurs.listeJoueurs.get(0).getPosXInit()][GestionJoueurs.listeJoueurs.get(0).getPosYInit()] = "     tortue 1    ";
+                plateau[GestionJoueurs.listeJoueurs.get(1).getPosXInit()][GestionJoueurs.listeJoueurs.get(1).getPosYInit()] = "     tortue 2    ";
                 // Positionnement du joyau
-                plateau[GestionJoyaux.listeJoyaux.get(0).getPosXJoyau()][GestionJoyaux.listeJoyaux.get(0).getPosYJoyau()] = "     joyau " + GestionJoyaux.listeJoyaux.get(0).getNumeroJoyau() + "     ";
+                plateau[GestionJoyaux.listeJoyaux.get(0).getPosXJoyau()][GestionJoyaux.listeJoyaux.get(0).getPosYJoyau()] = "    joyau  " + GestionJoyaux.listeJoyaux.get(0).getNumeroJoyau() + "     ";
                 for (String[] ligne : getPlateau()) {               // Parcourrir toute les lignes du tableau
                 System.out.println(Arrays.toString(ligne)+"\n");    // Afficher ligne par ligne le plateau
             }
@@ -78,6 +82,7 @@ public class Plateau {
                 GestionJoyaux.listeJoyaux.get(1).setPosYJoyau(3);
                 GestionJoyaux.listeJoyaux.get(2).setPosXJoyau(7);
                 GestionJoyaux.listeJoyaux.get(2).setPosYJoyau(6);
+
 
                 // Positions initiales des joueurs
                 GestionJoueurs.listeJoueurs.get(0).setPosXInit(0);
@@ -100,14 +105,19 @@ public class Plateau {
                         "\nATTENTION, pour gagner vous devez vous rendre EXACTEMENT sur un joyau");
                 System.out.println("Voici votre plateau de jeu :\n");
 
+
+                // Positionnement  de la colonne d'obstacle marrons
+                for (int i = 0; i < 8; i++) {
+                    plateau[i][7] = "mur en pierre";
+                }
                 // Positionnement des tortues
-                plateau[GestionJoueurs.listeJoueurs.get(0).getPosXInit()][GestionJoueurs.listeJoueurs.get(0).getPosYInit()] = "      tortue 1   ";
-                plateau[GestionJoueurs.listeJoueurs.get(1).getPosXInit()][GestionJoueurs.listeJoueurs.get(1).getPosYInit()] = "      tortue 2   ";
-                plateau[GestionJoueurs.listeJoueurs.get(2).getPosXInit()][GestionJoueurs.listeJoueurs.get(2).getPosYInit()] = "      tortue 3   ";
+                plateau[GestionJoueurs.listeJoueurs.get(0).getPosXInit()][GestionJoueurs.listeJoueurs.get(0).getPosYInit()] = "     tortue 1    ";
+                plateau[GestionJoueurs.listeJoueurs.get(1).getPosXInit()][GestionJoueurs.listeJoueurs.get(1).getPosYInit()] = "     tortue 2    ";
+                plateau[GestionJoueurs.listeJoueurs.get(2).getPosXInit()][GestionJoueurs.listeJoueurs.get(2).getPosYInit()] = "     tortue 3    ";
                 // Positionnement des joyaux
-                plateau[GestionJoyaux.listeJoyaux.get(0).getPosXJoyau()][GestionJoyaux.listeJoyaux.get(0).getPosYJoyau()] = "     joyau " + GestionJoyaux.listeJoyaux.get(0).getNumeroJoyau() + "     ";
-                plateau[GestionJoyaux.listeJoyaux.get(1).getPosXJoyau()][GestionJoyaux.listeJoyaux.get(1).getPosYJoyau()] = "     joyau " + GestionJoyaux.listeJoyaux.get(1).getNumeroJoyau() + "     ";
-                plateau[GestionJoyaux.listeJoyaux.get(2).getPosXJoyau()][GestionJoyaux.listeJoyaux.get(2).getPosYJoyau()] = "     joyau " + GestionJoyaux.listeJoyaux.get(2).getNumeroJoyau() + "     ";
+                plateau[GestionJoyaux.listeJoyaux.get(0).getPosXJoyau()][GestionJoyaux.listeJoyaux.get(0).getPosYJoyau()] = "    joyau  " + GestionJoyaux.listeJoyaux.get(0).getNumeroJoyau() + "     ";
+                plateau[GestionJoyaux.listeJoyaux.get(1).getPosXJoyau()][GestionJoyaux.listeJoyaux.get(1).getPosYJoyau()] = "    joyau  " + GestionJoyaux.listeJoyaux.get(1).getNumeroJoyau() + "     ";
+                plateau[GestionJoyaux.listeJoyaux.get(2).getPosXJoyau()][GestionJoyaux.listeJoyaux.get(2).getPosYJoyau()] = "    joyau  " + GestionJoyaux.listeJoyaux.get(2).getNumeroJoyau() + "     ";
                 for (String[] ligne : getPlateau()) {
                     System.out.println(Arrays.toString(ligne)+"\n");
                 }
@@ -145,13 +155,13 @@ public class Plateau {
                 System.out.println("Voici votre plateau de jeu :\n");
 
                 // Positionnement des tortues
-                plateau[GestionJoueurs.listeJoueurs.get(0).getPosXInit()][GestionJoueurs.listeJoueurs.get(0).getPosYInit()] = "      tortue 1   ";
-                plateau[GestionJoueurs.listeJoueurs.get(1).getPosXInit()][GestionJoueurs.listeJoueurs.get(1).getPosYInit()] = "      tortue 2   ";
-                plateau[GestionJoueurs.listeJoueurs.get(2).getPosXInit()][GestionJoueurs.listeJoueurs.get(2).getPosYInit()] = "      tortue 3   ";
-                plateau[GestionJoueurs.listeJoueurs.get(3).getPosXInit()][GestionJoueurs.listeJoueurs.get(3).getPosYInit()] = "      tortue 4   ";
+                plateau[GestionJoueurs.listeJoueurs.get(0).getPosXInit()][GestionJoueurs.listeJoueurs.get(0).getPosYInit()] = "     tortue 1    ";
+                plateau[GestionJoueurs.listeJoueurs.get(1).getPosXInit()][GestionJoueurs.listeJoueurs.get(1).getPosYInit()] = "     tortue 2    ";
+                plateau[GestionJoueurs.listeJoueurs.get(2).getPosXInit()][GestionJoueurs.listeJoueurs.get(2).getPosYInit()] = "     tortue 3    ";
+                plateau[GestionJoueurs.listeJoueurs.get(3).getPosXInit()][GestionJoueurs.listeJoueurs.get(3).getPosYInit()] = "     tortue 4    ";
                 // Positionnement des joyaux
-                plateau[GestionJoyaux.listeJoyaux.get(0).getPosXJoyau()][GestionJoyaux.listeJoyaux.get(0).getPosYJoyau()] = "     joyau " + GestionJoyaux.listeJoyaux.get(0).getNumeroJoyau() + "     ";
-                plateau[GestionJoyaux.listeJoyaux.get(1).getPosXJoyau()][GestionJoyaux.listeJoyaux.get(1).getPosYJoyau()] = "     joyau " + GestionJoyaux.listeJoyaux.get(1).getNumeroJoyau() + "     ";
+                plateau[GestionJoyaux.listeJoyaux.get(0).getPosXJoyau()][GestionJoyaux.listeJoyaux.get(0).getPosYJoyau()] = "    joyau  " + GestionJoyaux.listeJoyaux.get(0).getNumeroJoyau() + "     ";
+                plateau[GestionJoyaux.listeJoyaux.get(1).getPosXJoyau()][GestionJoyaux.listeJoyaux.get(1).getPosYJoyau()] = "    joyau  " + GestionJoyaux.listeJoyaux.get(1).getNumeroJoyau() + "     ";
                 for (String[] ligne : getPlateau()) {
                     System.out.println(Arrays.toString(ligne)+"\n");
                 }
