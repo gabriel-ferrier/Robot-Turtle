@@ -37,18 +37,16 @@ public class Plateau {
             }
         }
         switch (nb){
-            //TODO: seting positions des obstacles
-            //      positionner les obstacles sur le plateau initiale pour 2 et 3 joueurs
             case 2 :
                 //  Positions du joyau
                 GestionJoyaux.listeJoyaux.get(0).setPosXJoyau(7);
                 GestionJoyaux.listeJoyaux.get(0).setPosYJoyau(3);
 
                 // Positions initiales des joueurs
-                GestionJoueurs.listeJoueurs.get(0).setPosXInit(0);
-                GestionJoueurs.listeJoueurs.get(0).setPosYInit(1);
+                GestionJoueurs.listeJoueurs.get(0).setPosXInit(1);
+                GestionJoueurs.listeJoueurs.get(0).setPosYInit(3);
                 GestionJoueurs.listeJoueurs.get(1).setPosXInit(0);
-                GestionJoueurs.listeJoueurs.get(1).setPosYInit(5);
+                GestionJoueurs.listeJoueurs.get(1).setPosYInit(3);
 
                 // Initialisation des posistions des joueurs à ses positions initiales pour pouvoir travailler dessus apres
                 GestionJoueurs.listeJoueurs.get(0).setPosX(GestionJoueurs.listeJoueurs.get(0).getPosXInit());
@@ -58,12 +56,12 @@ public class Plateau {
 
                 System.out.println("Chaque joueur se voit attribué la tortue de son numéro. " +
                         "\nATTENTION, il est FORMELLEMENT INTERDIT de bloquer le chemin à un joyau lorsque vous placé un obstacle !! " +
-                        "\nATTENTION, pour gagner vous devez vous rendre EXACTEMENT sur un joyau");
+                        "\nATTENTION, pour gagner vous devez vous rendre EXACTEMENT sur un joyau \n");
                 System.out.println("Voici votre plateau de jeu :\n");
 
                 // Positionnement de la colonne d'obstacle marrons
                 for (int i = 0; i < 8; i++) {
-                    plateau[i][7] = "mur en pierre";
+                    plateau[i][7] = "  mur en pierre  ";
                 }
                 // Positionnement des tortues
                 plateau[GestionJoueurs.listeJoueurs.get(0).getPosXInit()][GestionJoueurs.listeJoueurs.get(0).getPosYInit()] = "     tortue 1    ";
@@ -102,7 +100,7 @@ public class Plateau {
 
                 System.out.println("Chaque joueur se voit attribué la tortue de son numéro. " +
                         "\nATTENTION, il est FORMELLEMENT INTERDIT de bloquer le chemin à un joyau lorsque vous placé un obstacle !! " +
-                        "\nATTENTION, pour gagner vous devez vous rendre EXACTEMENT sur un joyau");
+                        "\nATTENTION, pour gagner vous devez vous rendre EXACTEMENT sur un joyau \n");
                 System.out.println("Voici votre plateau de jeu :\n");
 
 
@@ -151,7 +149,7 @@ public class Plateau {
 
                 System.out.println("Chaque joueur se voit attribué la tortue de son numéro. " +
                         "\nATTENTION, il est FORMELLEMENT INTERDIT de bloquer le chemin à un joyau lorsque vous placé un obstacle !! " +
-                        "\nATTENTION, pour gagner vous devez vous rendre EXACTEMENT sur un joyau");
+                        "\nATTENTION, pour gagner vous devez vous rendre EXACTEMENT sur un joyau \n");
                 System.out.println("Voici votre plateau de jeu :\n");
 
                 // Positionnement des tortues

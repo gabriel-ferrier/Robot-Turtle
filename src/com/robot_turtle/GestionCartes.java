@@ -30,8 +30,14 @@ public class GestionCartes {
         for (int i = 0; i < 8; i++) {
             pioche.add(Cartes.VIOLET);
         }
+       /* for (int i = 0; i < 2; i++) {
+            pioche.add(Cartes.ROUGE);
+        }*/
+        for (int i = 0; i < 1; i++) {
+            deckCarte.add(Cartes.ROUGE);
+        }
         Collections.shuffle(pioche); //Melange l'ordre des cartes de la pioche
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 4; i++) {
             this.deckCarte.add(this.pioche.get((pioche.size() - 1)));
             this.pioche.remove((pioche.size() - 1));
         }
