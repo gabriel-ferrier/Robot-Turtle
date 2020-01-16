@@ -16,6 +16,7 @@ public class Joueur {
     //private GestionObstacles tousObstacles;
 
 
+
     public Joueur(int numero) {
         this.numero = numero;
         this.toutesCartes = new GestionCartes(numero); //creer un env de cartes qui est associé au joueur du meme numero
@@ -97,36 +98,25 @@ public class Joueur {
                     plateau.afficherPlateau();
                     break;
                 case 3:
-                    try{
+                    try{                                                                                // Essayer d'executer le prgramme et les fonctions de collisions
                         executerProgramme(i,plateau.getPlateau());
-                        collision2Joueurs(Game.nbJoueurs,plateau.getPlateau());         // S'execute  si collision entre 2 joueurs
-                        collisionFinale(Game.nbJoueurs, i ,plateau.getPlateau());       // S'execute si un joueur atteint un joyau
-                        plateau.afficherPlateau();                                      // Affiche le plateau à chaque fois qu'un joueur execute son programme et affiche tous les parametres ajoutés au plateau
-                    }catch (Exception e){
-                        //plateau[GestionJoueurs.listeJoueurs.get(i).getPosXInit()][GestionJoueurs.listeJoueurs.get(i).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(i).getNumero();
-                        horsPlateau(i,plateau.getPlateau());
+                        //collisionJoueurObstacle(i,plateau.getPlateau());
+                        collision2Joueurs(Game.nbJoueurs,plateau.getPlateau());                         // S'execute  si collision entre 2 joueurs
+                        collisionFinale(Game.nbJoueurs, i ,plateau.getPlateau());                       // S'execute si un joueur atteint un joyau
+                        plateau.afficherPlateau();                                                      // Affiche le plateau à chaque fois qu'un joueur execute son programme et affiche tous les parametres ajoutés au plateau
+                    }catch (Exception e){                                                               // Si on a une erreur c'est que le joueurs est sorti du plateau
+                        System.out.println("Retour à la case départ, vous etes sorti du plateau \n");
+                        collisionHorsPlateau(i,plateau.getPlateau());                                            // On renvoit ainsi le joueur en question à sa position initiale
                         plateau.afficherPlateau();
                     }
-
-                    //collisionOutOfBand(Game.nbJoueurs,plateau.getPlateau());        // S'execute si un joueur sort du plateau
-
                     break;
                 case 4:
-                    Game.finDuJeu = 1;                                                              // Impact dans le main
+                    Game.finDuJeu = 1;                                                                  // Impact dans le main
                     System.out.println("Vous n'avez pas réussi a rejoindre le joyau a temps " +
                             " \nVous avez malheureusement perdu... ");
                     break;
             }
         }
-    }
-
-
-    public void horsPlateau(int valueOfPlayer,String [][] plateau){
-        plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosXInit()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).getNumero();
-        GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosX(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosXInit());
-        GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosY(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosYInit());
-        GestionJoueurs.listeJoueurs.get(valueOfPlayer).setDirection(" SUD ");
-
     }
 
 
@@ -144,16 +134,16 @@ public class Joueur {
                     System.out.println(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte() + " est votre deck de cartes \n");
                     System.out.println(" Quel indice de carte voulez-vous mettre à la défausse ? ");
                     int indiceDefausse0 = scanner.nextInt();
-                    GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDefausse().add(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().get(indiceDefausse0));
-                    GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().remove(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().get(indiceDefausse0));
+                    GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDefausse().add(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().get(indiceDefausse0));     // Ajout de la carte retirée du deck a la defausse du joueur
+                    GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().remove(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().get(indiceDefausse0)); // On retire la carte retirée du deck de cartes
                 }
                 System.out.println(" Votre deck de cartes est maintenant " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte());
                 System.out.println(" Tapez 1 pour piocher ");
                 int pioche0 = scanner.nextInt();
                 if (pioche0 == 1){
                     do{
-                        GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().add((GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().get((GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().size() - 1))));
-                        GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().remove((GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().size() - 1));
+                        GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().add((GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().get((GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().size() - 1))));  // Ajout du nombre de cartes manquant au deck pour avoir 5 cartes dans le deck
+                        GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().remove((GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().size() - 1)); // On retire les cartes piochées piochées dans la pioche et destinées au deck de carte
                     } while (GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().size() != 5);
                 }
                 System.out.println(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte() + " est votre deck de cartes ");
@@ -164,8 +154,8 @@ public class Joueur {
             System.out.println(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte() + " est votre deck de cartes \n");
             System.out.println(" Quel indice de carte voulez-vous ajouter ");
             int indice = scanner.nextInt();
-            GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().add(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().get(indice));
-            GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().remove(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().get(indice));
+            GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().add(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().get(indice));     // Ajouter la carte choisit au programme
+            GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().remove(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().get(indice));  // On retire la carte choisit du deck de carte
         }
         System.out.println(" Votre deck de cartes est maintenant:" + (GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte()) +
                 " \n Que voulez- vous faire (0 = défausse et 1 = piocher) ? ");
@@ -177,23 +167,23 @@ public class Joueur {
                 System.out.println(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte() + " est votre deck de cartes \n");
                 System.out.println(" Quel indice de carte voulez-vous mettre à la défausse ? ");
                 int indiceDefausse = scanner.nextInt();
-                GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDefausse().add(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().get(indiceDefausse));
-                GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().remove(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().get(indiceDefausse));
+                GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDefausse().add(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().get(indiceDefausse));      // Ajout de la carte choisit à la défausse du joueur
+                GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().remove(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().get(indiceDefausse));  // On retire la carte choisit du deck de cartes
             }
             System.out.println(" Votre deck de cartes est maintenant " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte());
             System.out.println(" Tapez 1 pour piocher ");
             int pioche = scanner.nextInt();
             if (pioche == 1){
                 do{
-                    GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().add((GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().get((GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().size() - 1))));
-                    GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().remove((GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().size() - 1));
+                    GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().add((GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().get((GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().size() - 1)))); // Ajout du nombre de cartes manquant au deck pour avoir 5 cartes dans le deck
+                    GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().remove((GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().size() - 1)); // On retire les cartes piochées dans la pioche et destinées au deck de carte
                 } while (GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().size() != 5);
             }
             System.out.println(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte() + " est votre deck de cartes ");
         } else if (choix == 1) {
             do {
-                GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().add((GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().get((GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().size() - 1))));
-                GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().remove((GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().size() - 1));
+                GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().add((GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().get((GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().size() - 1)))); // Ajout du nombre de cartes manquant au deck pour avoir 5 cartes dans le deck
+                GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().remove((GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().size() - 1)); // On retire les cartes piochées piochées dans la pioche et destinées au deck de carte
             } while (GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().size() != 5);
             System.out.println(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte() + " est votre deck de cartes ");
         }
@@ -223,6 +213,30 @@ public class Joueur {
         GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckObstacle().remove(indiceObs);
     }
 
+
+   /* public void collisionJoueurObstacle(int valueOfPlayer, String [][] plateau){
+        int positionXJoueur = GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()+1;
+        int positionYJoueur = GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY();
+
+        if ( (plateau[positionXJoueur][positionYJoueur] == " obstacle marron ")) {
+            System.out.println("test");}
+            *//*switch (GestionJoueurs.listeJoueurs.get(valueOfPlayer).getDirection()){
+                case " SUD ":
+                    System.out.println(" test ");
+                    //plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = " obstacle marron ";
+                    *//**//*GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosX(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()-1);
+                    plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).getNumero();
+                    GestionJoueurs.listeJoueurs.get(valueOfPlayer).setDirection(" NORD ");*//**//*
+                    break;
+            }
+
+        }
+        else if ( (plateau[positionXJoueur][positionYJoueur].equals("obstacle de glace")) ){
+
+        }
+*//*
+    }*/
+
     public void executerProgramme(int valueOfPlayer,  String[][] plateau) {
         System.out.println(" Votre programme est : " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme());
 
@@ -231,24 +245,74 @@ public class Joueur {
                     case BLEU: // Le joueur souhaite avancer
                         switch (GestionJoueurs.listeJoueurs.get(valueOfPlayer).getDirection()) {
                             case " SUD ":
-                                plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "        0        ";
-                                GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosX(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX() + 1);
-                                plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).getNumero();
+                                // Conditions si le joueur heurte un obstacle de pierre : direction = NORD
+                                if ( plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()+1][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()].equals(" obstacle marron ")) {
+                                    System.out.println(" Demi-tour, vous avez heurté un obstacle, attention votre direction a tourné de 180° ");
+                                    GestionJoueurs.listeJoueurs.get(valueOfPlayer).setDirection(" NORD ");
+                                }
+                                // Conditions si le joueur heurte un obstacle de glace : direction = NORD
+                                else if (plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()+1][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()].equals("obstacle de glace") ){
+                                    GestionJoueurs.listeJoueurs.get(valueOfPlayer).setDirection(" NORD ");
+                                }
+                                // Si pas d'obstacles alors le joueur avance vers le SUD
+                                else {
+                                    plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "        0        ";
+                                    GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosX(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX() + 1);
+                                    plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).getNumero();
+                                }
                                 break;
                             case " NORD ":
-                                plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "        0        ";
-                                GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosX(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX() - 1);
-                                plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).getNumero();
+                                // Conditions si le joueur heurte un obstacle de pierre : direction = SUD
+                                if (plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()-1][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()].equals(" obstacle marron ") ){
+                                    GestionJoueurs.listeJoueurs.get(valueOfPlayer).setDirection(" SUD ");
+                                }
+                                // Conditions si le joueur heurte un obstacle de glace : direction = SUD
+                                else if (plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()-1][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()].equals("obstacle de glace") ){
+                                    System.out.println(" Demi-tour, vous avez heurté un obstacle, attention votre direction a tourné de 180° ");
+                                    GestionJoueurs.listeJoueurs.get(valueOfPlayer).setDirection(" SUD ");
+                                }
+                                // Si pas d'obstacles alors le joueur avance vers le NORD
+                                else {
+                                    plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "        0        ";
+                                    GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosX(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX() - 1);
+                                    plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).getNumero();
+                                }
                                 break;
                             case " EST ":
-                                plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "        0        ";
-                                GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosY(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY() - 1);
-                                plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).getNumero();
+                                // Conditions si le joueur heurte un obstacle de pierre : direction = OUEST
+                                if (plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()-1].equals(" obstacle marron ") ){
+                                    System.out.println(" Demi-tour, vous avez heurté un obstacle, attention votre direction a tourné de 180° ");
+                                    GestionJoueurs.listeJoueurs.get(valueOfPlayer).setDirection(" OUEST ");
+                                }
+                                // Conditions si le joueur heurte un obstacle de glace : direction = OUEST
+                                else if (plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()-1].equals("obstacle de glace") ){
+                                    System.out.println(" Demi-tour, vous avez heurté un obstacle, attention votre direction a tourné de 180° ");
+                                    GestionJoueurs.listeJoueurs.get(valueOfPlayer).setDirection(" OUEST ");
+                                }
+                                // Si pas d'obstacles alors le joueur avance vers l'EST
+                                else {
+                                    plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "        0        ";
+                                    GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosY(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY() - 1);
+                                    plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).getNumero();;
+                                }
                                 break;
                             case " OUEST ":
-                                plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "        0        ";
-                                GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosY(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY() + 1);
-                                plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).getNumero();
+                                // Conditions si le joueur heurte un obstacle de pierre : direction = EST
+                                if (plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()+1].equals(" obstacle marron ") ){
+                                    System.out.println(" Demi-tour, vous avez heurté un obstacle, attention votre direction a tourné de 180° ");
+                                    GestionJoueurs.listeJoueurs.get(valueOfPlayer).setDirection(" EST ");
+                                }
+                                // Conditions si le joueur heurte un obstacle de glace : direction = EST
+                                else if (plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()+1].equals("obstacle de glace") ){
+                                    System.out.println(" Demi-tour, vous avez heurté un obstacle, attention votre direction a tourné de 180° ");
+                                    GestionJoueurs.listeJoueurs.get(valueOfPlayer).setDirection(" EST ");
+                                }
+                                // Si pas d'obstacles alors le joueur avance vers l'OUEST
+                                else {
+                                    plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "        0        ";
+                                    GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosY(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY() + 1);
+                                    plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).getNumero();
+                                }
                                 break;
                         }
                         break;
@@ -285,6 +349,7 @@ public class Joueur {
                         }
                         break;
                 }
+
         }
 
         // Réinitialiser le programme de chaque joueurs après exécution
@@ -294,6 +359,15 @@ public class Joueur {
                 GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().remove(i);
             }while(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().size() != 0);
         }
+
+    }
+
+
+    public void collisionHorsPlateau(int valueOfPlayer,String [][] plateau){
+        plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosXInit()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).getNumero();
+        GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosX(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosXInit());
+        GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosY(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosYInit());
+        GestionJoueurs.listeJoueurs.get(valueOfPlayer).setDirection(" SUD ");
 
     }
 
@@ -513,77 +587,6 @@ public class Joueur {
     //      si position d'un joueur est sur cette colonne alors goback position initiale et laisser a cette position un obstacle de pierre
 
 
-
-
-    //TODO: méthode collision si joueur out of bands
-    public void collisionOutOfBand(int nombreDeJoueurs, String [][] plateau){
-        for (int i = 0; i < nombreDeJoueurs; i++) {                             // Parcourir tous les joueurs
-            for (int j = 8; j < 15; j++) {                                      // 8 positions hors du plateau en positif
-                for (int k = -8; k < 0; k++) {                                 // 8 positions hors du plateau en negatif
-                    if (GestionJoueurs.listeJoueurs.get(i).getPosX() == j) {
-                        System.out.println("Retour à la case départ, vous êtes sorti du plateau \n");
-
-                        // Renvoyer la tortue à sa position initale
-                        plateau[GestionJoueurs.listeJoueurs.get(i).getPosXInit()][GestionJoueurs.listeJoueurs.get(i).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(i).getNumero();
-
-                        // Réattribuer les parametres initiaux de la tortue
-                        GestionJoueurs.listeJoueurs.get(i).setPosX(GestionJoueurs.listeJoueurs.get(i).getPosXInit());
-                        GestionJoueurs.listeJoueurs.get(i).setDirection(" SUD ");
-                    } else if (GestionJoueurs.listeJoueurs.get(i).getPosY() == j) {
-                        System.out.println("Retour à la case départ, vous êtes sorti du plateau \n");
-
-                        // Renvoyer les tortues à leurs positions initales
-                        plateau[GestionJoueurs.listeJoueurs.get(i).getPosXInit()][GestionJoueurs.listeJoueurs.get(i).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(i).getNumero();
-
-                        // Réattribuer les parametres initiaux de la tortue
-                        GestionJoueurs.listeJoueurs.get(i).setPosY(GestionJoueurs.listeJoueurs.get(i).getPosYInit());
-                        GestionJoueurs.listeJoueurs.get(i).setDirection(" SUD ");
-                    } else if (GestionJoueurs.listeJoueurs.get(i).getPosX() == k) {
-                        System.out.println("Retour à la case départ, vous êtes sorti du plateau \n");
-                        // Renvoyer les tortues à leurs positions initales
-                        plateau[GestionJoueurs.listeJoueurs.get(i).getPosXInit()][GestionJoueurs.listeJoueurs.get(i).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(i).getNumero();
-
-                        // Réattribuer les parametres initiaux de la tortue
-                        GestionJoueurs.listeJoueurs.get(i).setPosX(GestionJoueurs.listeJoueurs.get(i).getPosXInit());
-                        GestionJoueurs.listeJoueurs.get(i).setDirection(" SUD ");
-                    } else if (GestionJoueurs.listeJoueurs.get(i).getPosY() == k) {
-                        System.out.println("Retour à la case départ, vous êtes sorti du plateau \n");
-                        // Renvoyer les tortues à leurs positions initales
-                        plateau[GestionJoueurs.listeJoueurs.get(i).getPosXInit()][GestionJoueurs.listeJoueurs.get(i).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(i).getNumero();
-
-                        // Réattribuer les parametres initiaux de la tortue
-                        GestionJoueurs.listeJoueurs.get(i).setPosY(GestionJoueurs.listeJoueurs.get(i).getPosYInit());
-                        GestionJoueurs.listeJoueurs.get(i).setDirection(" SUD ");
-                    }
-                    else if (GestionJoueurs.listeJoueurs.get(i).getPosX() == j && GestionJoueurs.listeJoueurs.get(i).getPosY() == j) {
-                        System.out.println("Retour à la case départ, vous êtes sorti du plateau \n");
-                        // Renvoyer les tortues à leurs positions initales
-                        plateau[GestionJoueurs.listeJoueurs.get(i).getPosXInit()][GestionJoueurs.listeJoueurs.get(i).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(i).getNumero();
-
-                        // Réattribuer les parametres initiaux de la tortue
-                        GestionJoueurs.listeJoueurs.get(i).setPosX(GestionJoueurs.listeJoueurs.get(i).getPosXInit());
-                        GestionJoueurs.listeJoueurs.get(i).setPosY(GestionJoueurs.listeJoueurs.get(i).getPosYInit());
-                        GestionJoueurs.listeJoueurs.get(i).setDirection(" SUD ");
-                    }
-                    else if (GestionJoueurs.listeJoueurs.get(i).getPosX() == k && GestionJoueurs.listeJoueurs.get(i).getPosY() == k) {
-                        System.out.println("Retour à la case départ, vous êtes sorti du plateau \n");
-                        // Renvoyer les tortues à leurs positions initales
-                        plateau[GestionJoueurs.listeJoueurs.get(i).getPosXInit()][GestionJoueurs.listeJoueurs.get(i).getPosYInit()] = "      tortue    " + GestionJoueurs.listeJoueurs.get(i).getNumero();
-
-                        // Réattribuer les parametres initiaux de la tortue
-                        GestionJoueurs.listeJoueurs.get(i).setPosX(GestionJoueurs.listeJoueurs.get(i).getPosXInit());
-                        GestionJoueurs.listeJoueurs.get(i).setPosY(GestionJoueurs.listeJoueurs.get(i).getPosYInit());
-                        GestionJoueurs.listeJoueurs.get(i).setDirection(" SUD ");
-                    }
-                }
-            }
-        }
-    }
-
-
-
-
-
     public void collisionFinale(int nombreDeJoueur, int valueOfPlayer, String [][] plateau){
         switch (nombreDeJoueur){
             case 2:
@@ -649,10 +652,6 @@ public class Joueur {
                 break;
         }
     }
-
-
-
-
 
 
 }

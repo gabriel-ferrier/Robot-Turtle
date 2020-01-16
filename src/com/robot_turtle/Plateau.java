@@ -57,7 +57,7 @@ public class Plateau {
                 GestionJoueurs.listeJoueurs.get(1).setPosY(GestionJoueurs.listeJoueurs.get(1).getPosYInit());
 
                 System.out.println("Chaque joueur se voit attribué la tortue de son numéro. " +
-                        "\nAttention, il est FORMELLEMENT INTERDIT de bloquer le chemin à un autre joueur lorsque vous placé un obstacle !! ");
+                        "\nAttention, il est FORMELLEMENT INTERDIT de bloquer le chemin à un joyau lorsque vous placé un obstacle !! ");
                 System.out.println("Voici votre plateau de jeu :\n");
 
                 // Positionnement des tortues
