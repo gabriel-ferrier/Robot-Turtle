@@ -57,7 +57,8 @@ public class Plateau {
                 GestionJoueurs.listeJoueurs.get(1).setPosY(GestionJoueurs.listeJoueurs.get(1).getPosYInit());
 
                 System.out.println("Chaque joueur se voit attribué la tortue de son numéro. " +
-                        "\nAttention, il est FORMELLEMENT INTERDIT de bloquer le chemin à un joyau lorsque vous placé un obstacle !! ");
+                        "\nATTENTION, il est FORMELLEMENT INTERDIT de bloquer le chemin à un joyau lorsque vous placé un obstacle !! " +
+                        "\nATTENTION, pour gagner vous devez vous rendre EXACTEMENT sur un joyau");
                 System.out.println("Voici votre plateau de jeu :\n");
 
                 // Positionnement des tortues
@@ -76,7 +77,7 @@ public class Plateau {
                 GestionJoyaux.listeJoyaux.get(1).setPosXJoyau(7);
                 GestionJoyaux.listeJoyaux.get(1).setPosYJoyau(3);
                 GestionJoyaux.listeJoyaux.get(2).setPosXJoyau(7);
-                GestionJoyaux.listeJoyaux.get(2).setPosYJoyau(7);
+                GestionJoyaux.listeJoyaux.get(2).setPosYJoyau(6);
 
                 // Positions initiales des joueurs
                 GestionJoueurs.listeJoueurs.get(0).setPosXInit(0);
@@ -95,7 +96,8 @@ public class Plateau {
                 GestionJoueurs.listeJoueurs.get(2).setPosY(GestionJoueurs.listeJoueurs.get(2).getPosYInit());
 
                 System.out.println("Chaque joueur se voit attribué la tortue de son numéro. " +
-                        "\nAttention, il est FORMELLEMENT INTERDIT de bloquer le chemin à un autre joueur lorsque vous placé un obstacle !! ");
+                        "\nATTENTION, il est FORMELLEMENT INTERDIT de bloquer le chemin à un joyau lorsque vous placé un obstacle !! " +
+                        "\nATTENTION, pour gagner vous devez vous rendre EXACTEMENT sur un joyau");
                 System.out.println("Voici votre plateau de jeu :\n");
 
                 // Positionnement des tortues
@@ -138,7 +140,8 @@ public class Plateau {
                 GestionJoueurs.listeJoueurs.get(3).setPosY(GestionJoueurs.listeJoueurs.get(3).getPosYInit());
 
                 System.out.println("Chaque joueur se voit attribué la tortue de son numéro. " +
-                        "\nAttention, il est FORMELLEMENT INTERDIT de bloquer le chemin à un autre joueur lorsque vous placé un obstacle !! ");
+                        "\nATTENTION, il est FORMELLEMENT INTERDIT de bloquer le chemin à un joyau lorsque vous placé un obstacle !! " +
+                        "\nATTENTION, pour gagner vous devez vous rendre EXACTEMENT sur un joyau");
                 System.out.println("Voici votre plateau de jeu :\n");
 
                 // Positionnement des tortues
