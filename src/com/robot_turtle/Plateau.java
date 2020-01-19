@@ -43,10 +43,10 @@ public class Plateau {
                 GestionJoyaux.listeJoyaux.get(0).setPosYJoyau(3);
 
                 // Positions initiales des joueurs
-                GestionJoueurs.listeJoueurs.get(0).setPosXInit(1);
-                GestionJoueurs.listeJoueurs.get(0).setPosYInit(3);
+                GestionJoueurs.listeJoueurs.get(0).setPosXInit(0);
+                GestionJoueurs.listeJoueurs.get(0).setPosYInit(1);
                 GestionJoueurs.listeJoueurs.get(1).setPosXInit(0);
-                GestionJoueurs.listeJoueurs.get(1).setPosYInit(3);
+                GestionJoueurs.listeJoueurs.get(1).setPosYInit(5);
 
                 // Initialisation des posistions des joueurs à ses positions initiales pour pouvoir travailler dessus apres
                 GestionJoueurs.listeJoueurs.get(0).setPosX(GestionJoueurs.listeJoueurs.get(0).getPosXInit());
@@ -106,7 +106,7 @@ public class Plateau {
 
                 // Positionnement  de la colonne d'obstacle marrons
                 for (int i = 0; i < 8; i++) {
-                    plateau[i][7] = "mur en pierre";
+                    plateau[i][7] = "  mur en pierre  ";
                 }
                 // Positionnement des tortues
                 plateau[GestionJoueurs.listeJoueurs.get(0).getPosXInit()][GestionJoueurs.listeJoueurs.get(0).getPosYInit()] = "     tortue 1    ";
