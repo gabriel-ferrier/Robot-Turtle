@@ -1021,13 +1021,14 @@ public class Joueur {
     public void collisionFinale(int nombreDeJoueur, int valueOfPlayer, String [][] plateau){
         switch (nombreDeJoueur){
             case 2:
-                // Positions du joyau
+                // Positions du joyau sur le plateau
                 int positionXJoyau = GestionJoyaux.listeJoyaux.get(0).getPosXJoyau();
                 int positionYJoyau = GestionJoyaux.listeJoyaux.get(0).getPosYJoyau();
                 // Positions d'un joueur sur les deux
                 int positionXJoueur2 = GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX();
                 int positionYJoueur2 = GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY();
-                // Si elles correspondent alors le joueur est sur le joyau
+
+                // 1er et unique cas : 1 des 2 joueurs rencontre le joyau et gagne donc la partie
                 if (positionXJoueur2 == positionXJoyau && positionYJoueur2 == positionYJoyau && GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().size() == 0){                                            // Verifier la taille du programme pour etre sur que la tortue s'arrete sur le joyau et ne continue pas apres
                    plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "    joyau  " + GestionJoyaux.listeJoyaux.get(0).getNumeroJoyau() + "     ";
                    System.out.println(" \n Bravo Joueur " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).getNumero() + " vous avez atteint le joyau en 1er " +
@@ -1038,26 +1039,39 @@ public class Joueur {
                 }
                break;
             case 3:
+                // Positions des joyaux du plateau
                 int positionXJoyau1 = GestionJoyaux.listeJoyaux.get(0).getPosXJoyau();
                 int positionYJoyau1 = GestionJoyaux.listeJoyaux.get(0).getPosYJoyau();
                 int positionXJoyau2 = GestionJoyaux.listeJoyaux.get(1).getPosXJoyau();
                 int positionYJoyau2 = GestionJoyaux.listeJoyaux.get(1).getPosYJoyau();
                 int positionXJoyau3 = GestionJoyaux.listeJoyaux.get(2).getPosXJoyau();
                 int positionYJoyau3 = GestionJoyaux.listeJoyaux.get(2).getPosYJoyau();
-
+                // Position possible d'un des 3 joueurs
                 int positionXJoueur3 = GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX();
                 int positionYJoueur3 = GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY();
 
+                // 1er cas: un des 3 joueurs recontre le joyau 1
                 if (positionXJoueur3 == positionXJoyau1  && positionYJoueur3 == positionYJoyau1 && GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().size()==0) {
                     plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "    joyau  " + GestionJoyaux.listeJoyaux.get(valueOfPlayer).getNumeroJoyau() + "     ";
+                    // Important de reinitialiser les positions du joueur qui a atteint le joyau pour qu'un autre joueur puisse se rendre dessus et ne rentre pas en collision avec le joueur ayant atteint le joyau
+                    GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosX(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosXInit());
+                    GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosY(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosYInit());
                     System.out.println(" \n Bravo Joueur " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).getNumero() + " vous avez atteint le joyau " );
                 }
+                // 2eme cas: un des 3 joueurs recontre le joyau 2
                 else if (positionXJoueur3 == positionXJoyau2  && positionYJoueur3 == positionYJoyau2 && GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().size()==0) {
-                plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "    joyau  " + GestionJoyaux.listeJoyaux.get(valueOfPlayer).getNumeroJoyau() + "     ";
-                System.out.println(" \n Bravo Joueur " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).getNumero() + " vous avez atteint le joyau " );
+                    plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "    joyau  " + GestionJoyaux.listeJoyaux.get(valueOfPlayer).getNumeroJoyau() + "     ";
+                    // Important de reinitialiser les positions du joueur qui a atteint le joyau pour qu'un autre joueur puisse se rendre dessus et ne rentre pas en collision avec le joueur ayant atteint le joyau
+                    GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosX(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosXInit());
+                    GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosY(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosYInit());
+                    System.out.println(" \n Bravo Joueur " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).getNumero() + " vous avez atteint le joyau " );
                 }
+                // 3eme cas: un des 3 joueurs recontre le joyau 3
                 else if (positionXJoueur3 == positionXJoyau3  && positionYJoueur3 == positionYJoyau3 && GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().size()==0) {
                     plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "    joyau  " + GestionJoyaux.listeJoyaux.get(valueOfPlayer).getNumeroJoyau() + "     ";
+                    // Important de reinitialiser les positions du joueur qui a atteint le joyau pour qu'un autre joueur puisse se rendre dessus et ne rentre pas en collision avec le joueur ayant atteint le joyau
+                    GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosX(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosXInit());
+                    GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosY(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosYInit());
                     System.out.println(" \n Bravo Joueur " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).getNumero() + " vous avez atteint le joyau " );
                 }
                else{
@@ -1068,22 +1082,27 @@ public class Joueur {
                 }
                 break;
             case 4:
+                // Positions des joyaux du plateau
                 int positionXJoyau1_4 = GestionJoyaux.listeJoyaux.get(0).getPosXJoyau();
                 int positionYJoyau1_4 = GestionJoyaux.listeJoyaux.get(0).getPosYJoyau();
                 int positionXJoyau2_4 = GestionJoyaux.listeJoyaux.get(1).getPosXJoyau();
                 int positionYJoyau2_4 = GestionJoyaux.listeJoyaux.get(1).getPosYJoyau();
-
+                // Position possible d'un des 4 joueurs
                 int positionXJoueur4 = GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX();
                 int positionYJoueur4 = GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY();
 
+                // 1er cas : 1 des 4 joueurs rencontre le joyau 1
                 if (positionXJoueur4 == positionXJoyau1_4  && positionYJoueur4 == positionYJoyau1_4 && GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().size() == 0) {   // Si le joueur ne fais que passer par le joyau il ne gagne pas
                     plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "    joyau  " + GestionJoyaux.listeJoyaux.get(valueOfPlayer).getNumeroJoyau() + "     ";
+                    // Important de reinitialiser les positions du joueur qui a atteint le joyau pour qu'un autre joueur puisse se rendre dessus et ne rentre pas en collision avec le joueur ayant atteint le joyau
                     GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosX(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosXInit());
                     GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosY(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosYInit());
                     System.out.println(" \n Bravo Joueur " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).getNumero() + " vous avez atteint le joyau " );
                 }
+                // 2eme cas: 1 des 4 joueurs rencontre le joyau 2
                 else if (positionXJoueur4 == positionXJoyau2_4  && positionYJoueur4 == positionYJoyau2_4 && GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().size() == 0) {
                     plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "    joyau  " + GestionJoyaux.listeJoyaux.get(valueOfPlayer).getNumeroJoyau() + "     ";
+                    // Important de reinitialiser les positions du joueur qui a atteint le joyau pour qu'un autre joueur puisse se rendre dessus et ne rentre pas en collision avec le joueur ayant atteint le joyau
                     GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosX(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosXInit());
                     GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosY(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosYInit());
                     System.out.println(" \n Bravo Joueur " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).getNumero() + " vous avez atteint le joyau " );
