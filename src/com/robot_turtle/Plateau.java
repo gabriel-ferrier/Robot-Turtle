@@ -128,13 +128,13 @@ public class Plateau {
                 GestionJoyaux.listeJoyaux.get(1).setPosYJoyau(6);
 
                 // Positions initiales des joueurs
-                GestionJoueurs.listeJoueurs.get(0).setPosXInit(0);
+                GestionJoueurs.listeJoueurs.get(0).setPosXInit(5);
                 GestionJoueurs.listeJoueurs.get(0).setPosYInit(0);
-                GestionJoueurs.listeJoueurs.get(1).setPosXInit(0);
+                GestionJoueurs.listeJoueurs.get(1).setPosXInit(5);
                 GestionJoueurs.listeJoueurs.get(1).setPosYInit(2);
-                GestionJoueurs.listeJoueurs.get(2).setPosXInit(0);
+                GestionJoueurs.listeJoueurs.get(2).setPosXInit(5);
                 GestionJoueurs.listeJoueurs.get(2).setPosYInit(5);
-                GestionJoueurs.listeJoueurs.get(3).setPosXInit(0);
+                GestionJoueurs.listeJoueurs.get(3).setPosXInit(5);
                 GestionJoueurs.listeJoueurs.get(3).setPosYInit(7);
 
                 // Initialisation des posistions des joueurs à ses positions initiales pour pouvoir travailler dessus apres

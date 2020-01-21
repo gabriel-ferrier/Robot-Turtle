@@ -90,22 +90,22 @@ public class Joueur {
                     plateau.afficherPlateau();
                     break;
                 case 3:
-                    try{                                                                                  // Essayer d'executer le programme et la fonction finale de collision tortue/joyau
+                    //try{                                                                                  // Essayer d'executer le programme et la fonction finale de collision tortue/joyau
                         executerProgramme(i,Game.nbJoueurs,plateau.getPlateau());
                         collision2Joueurs(Game.nbJoueurs,plateau.getPlateau());                             // S'execute si deux tortues sont exactement à la même position
                         collisionFinale(Game.nbJoueurs, i ,plateau.getPlateau());                           // S'execute si un joueur atteint un joyau
                         plateau.afficherPlateau();                                                          // Affiche le plateau à chaque fois qu'un joueur execute son programme et affiche tous les parametres ajoutés au plateau
-                    }catch (Exception e){                                                                 // Si on a une erreur c'est que le joueurs est sorti du plateau
+                   /* }catch (Exception e){                                                                 // Si on a une erreur c'est que le joueurs est sorti du plateau
                         System.out.println("Retour à la case départ, vous etes sorti du plateau " +
                                 "\n Attention, vous retrouvez votre direction initale et votre programme repart à 0 !");
                         collisionHorsPlateau(i,plateau.getPlateau());                                            // On renvoit ainsi le joueur en question à sa position initiale
                         plateau.afficherPlateau();
-                    }
+                    }*/
                     break;
                 case 4:
                     Game.finDuJeu = 1;                                                                  // Impact dans le main
                     System.out.println("Vous n'avez pas réussi a rejoindre le joyau a temps " +
-                            " \nVous avez malheureusement perdu... ");
+                            " \nVous avez malheureusement perdu... \n");
                     break;
             }
         }
@@ -562,7 +562,7 @@ public class Joueur {
                             GestionJoueurs.listeJoueurs.get(valueOfPlayer).setDirection(" EST ");       // Si direction = SUD : prochaine direction = EST
                             break;
                         case " NORD ":
-                            GestionJoueurs.listeJoueurs.get(valueOfPlayer).setDirection(" OUEST ");     // Si direction = NORD : prochaine direction = EST
+                            GestionJoueurs.listeJoueurs.get(valueOfPlayer).setDirection(" OUEST ");     // Si direction = NORD : prochaine direction = OUEST
                             break;
                         case " EST ":
                             GestionJoueurs.listeJoueurs.get(valueOfPlayer).setDirection(" NORD ");      // Si direction = EST : prochaine direction = EST
@@ -1093,7 +1093,7 @@ public class Joueur {
 
                 // 1er cas : 1 des 4 joueurs rencontre le joyau 1
                 if (positionXJoueur4 == positionXJoyau1_4  && positionYJoueur4 == positionYJoyau1_4 && GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().size() == 0) {   // Si le joueur ne fais que passer par le joyau il ne gagne pas
-                    plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "    joyau  " + GestionJoyaux.listeJoyaux.get(valueOfPlayer).getNumeroJoyau() + "     ";
+                    plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "    joyau  " + GestionJoyaux.listeJoyaux.get(0).getNumeroJoyau() + "     ";
                     // Important de reinitialiser les positions du joueur qui a atteint le joyau pour qu'un autre joueur puisse se rendre dessus et ne rentre pas en collision avec le joueur ayant atteint le joyau
                     GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosX(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosXInit());
                     GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosY(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosYInit());
@@ -1101,7 +1101,7 @@ public class Joueur {
                 }
                 // 2eme cas: 1 des 4 joueurs rencontre le joyau 2
                 else if (positionXJoueur4 == positionXJoyau2_4  && positionYJoueur4 == positionYJoyau2_4 && GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().size() == 0) {
-                    plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "    joyau  " + GestionJoyaux.listeJoyaux.get(valueOfPlayer).getNumeroJoyau() + "     ";
+                    plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "    joyau  " + GestionJoyaux.listeJoyaux.get(1).getNumeroJoyau() + "     ";
                     // Important de reinitialiser les positions du joueur qui a atteint le joyau pour qu'un autre joueur puisse se rendre dessus et ne rentre pas en collision avec le joueur ayant atteint le joyau
                     GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosX(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosXInit());
                     GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosY(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosYInit());
