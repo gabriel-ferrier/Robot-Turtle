@@ -41,9 +41,9 @@ public class GestionCartes {
             this.deckCarte.add(this.pioche.get((pioche.size() - 1)));
             this.pioche.remove((pioche.size() - 1));
         }
-        if (pioche.size() == 0){  // TODO: vérifier si ca marche
+       /* if (pioche.size() == 0){  // TODO: vérifier si ca marche
             pioche.addAll(defausse);
-        }
+        }*/
     }
 
     public ArrayList<Cartes> getProgramme() {

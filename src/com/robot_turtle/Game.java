@@ -10,7 +10,6 @@ public class Game {
         nbJoueurs = menu.getNombreJoueurs();
         GestionJoueurs joueurs = new GestionJoueurs(nbJoueurs); // Lance la création des joueurs
         GestionJoyaux joyaux = new GestionJoyaux(nbJoueurs); // Lance la création des joyaux
-        //GestionObstacles obstacles = new GestionObstacles(nbJoueurs);
         Plateau plateau = new Plateau();
         plateau.afficherPlateauInit(nbJoueurs); // Affiche plateau initial
 
@@ -27,7 +26,6 @@ public class Game {
             }
         }
     }
-    //Joueur joueur = new Joueur(2);
 
     //Fenetre test = new Fenetre();
 }

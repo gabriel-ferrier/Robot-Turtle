@@ -132,11 +132,19 @@ public class Joueur {
                 System.out.println(" Votre deck de cartes est maintenant " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte());
                 System.out.println(" Tapez 1 pour piocher ");
                 int pioche0 = scanner.nextInt();
-                if (pioche0 == 1){
+                if (pioche0 == 1 && GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().size() > 0){
                     do{
                         GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().add((GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().get((GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().size() - 1))));  // Ajout du nombre de cartes manquant au deck pour avoir 5 cartes dans le deck
                         GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().remove((GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().size() - 1)); // On retire les cartes piochées piochées dans la pioche et destinées au deck de carte
                     } while (GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().size() != 5);
+                }
+                else if(pioche0 == 1 && GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().size() == 0){
+                    for (int i = 0; i < GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDefausse().size(); i++) {
+                        GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().add(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDefausse().get(i));
+                        GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDefausse().remove(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDefausse().get(i));
+                    }
+                    GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte().add((GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().get((GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().size() - 1))));  // Ajout du nombre de cartes manquant au deck pour avoir 5 cartes dans le deck
+                    GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().remove((GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getPioche().size() - 1)); // On retire les cartes piochées piochées dans la pioche et destinées au deck de carte
                 }
                 System.out.println(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDeckCarte() + " est votre deck de cartes ");
             }
@@ -425,6 +433,25 @@ public class Joueur {
         }
     }
 
+    public void collisionHorsPlateau(int valueOfPlayer,String [][] plateau){
+        plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "        0        ";
+        plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosXInit()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosYInit()] = "    tortue  " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).getNumero() + "    ";
+
+        GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosX(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosXInit());
+        GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosY(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosYInit());
+
+        GestionJoueurs.listeJoueurs.get(valueOfPlayer).setDirection(" SUD ");
+
+        // Réinitialiser le programme de chaque joueurs après exécution
+        for (int i = 0; i < GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().size(); i++){
+            do{
+                GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getDefausse().add(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().get(i));
+                GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().remove(i);
+            }while(GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().size() != 0);
+        }
+
+    }
+
 
     public void executerProgramme(int valueOfPlayer, int nombreDeJoueur, String[][] plateau) {
         System.out.println(" Votre programme est : " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme());
@@ -433,7 +460,7 @@ public class Joueur {
             switch (GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().get(compteurPrgm)) {
                 case BLEU: // Le joueur souhaite avancer
                     collision2Joueurs(nombreDeJoueur, plateau); // On rappelle cette fonction ici pour que le programme d'un joueur continue de s'executer s'il rencontre une tortue
-
+                    //collisionHorsPlateau(valueOfPlayer,plateau);
 
                     // Faire avancer le joueur en fonction de sa position
                     switch (GestionJoueurs.listeJoueurs.get(valueOfPlayer).getDirection()) {
@@ -557,15 +584,18 @@ public class Joueur {
                                     plateau[j][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "        0        ";
                                     test = false;
                                 }
-                                switch (nombreDeJoueur) {
+                            }
+                            break;
+
+                                /*switch (nombreDeJoueur) {
                                     case 2: //TODO: A REVOIR !!!
 
-                                                   /* else if ((plateau[j][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()]).equals("    tortue  " + GestionJoueurs.listeJoueurs.get(k).getNumero() + "    ") && test) {
+                                                   *//* else if ((plateau[j][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()]).equals("    tortue  " + GestionJoueurs.listeJoueurs.get(k).getNumero() + "    ") && test) {
                                                         // La tortue touchée fait demi-tour
                                                         System.out.println("Vous avez touché une tortue, celle-ci fait demi-tour \n");
                                                         GestionJoueurs.listeJoueurs.get(k).setDirection(" NORD ");
                                                         test = false;
-                                                    }*/
+                                                    }*//*
                                         if ((plateau[j][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()]).equals("    joyau  " + GestionJoyaux.listeJoyaux.get(0).getNumeroJoyau() + "     ") && test) {
                                             System.out.println("Vous avez touché un joyau, vous faites donc demi-tour : attention votre direction est décalée de 180° \n");
                                             // La tortue qui a envoyé le laser fait demi-tour
@@ -606,15 +636,13 @@ public class Joueur {
                                         break;
                                 }
                                 break;
-                            }
-                            break;
+                            //}
+                            break;*/
 
                     }
 
             }
         }
-
-
 
         // Réinitialiser le programme de chaque joueurs après exécution
         for (int i = 0; i < GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().size(); i++){
@@ -990,19 +1018,6 @@ public class Joueur {
 */
 
 
-
-    public void collisionHorsPlateau(int valueOfPlayer,String [][] plateau){
-        plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosXInit()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosYInit()] = "    tortue  " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).getNumero() + "    ";
-        GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosX(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosXInit());
-        GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosY(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosYInit());
-        GestionJoueurs.listeJoueurs.get(valueOfPlayer).setDirection(" SUD ");
-
-    }
-
-
-
-
-
     public void collisionFinale(int nombreDeJoueur, int valueOfPlayer, String [][] plateau){
         switch (nombreDeJoueur){
             case 2:
@@ -1061,12 +1076,16 @@ public class Joueur {
                 int positionXJoueur4 = GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX();
                 int positionYJoueur4 = GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY();
 
-                if (positionXJoueur4 == positionXJoyau1_4  && positionYJoueur4 == positionYJoyau1_4 && GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().size() == 0) {
+                if (positionXJoueur4 == positionXJoyau1_4  && positionYJoueur4 == positionYJoyau1_4 && GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().size() == 0) {   // Si le joueur ne fais que passer par le joyau il ne gagne pas
                     plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "    joyau  " + GestionJoyaux.listeJoyaux.get(valueOfPlayer).getNumeroJoyau() + "     ";
+                    GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosX(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosXInit());
+                    GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosY(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosYInit());
                     System.out.println(" \n Bravo Joueur " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).getNumero() + " vous avez atteint le joyau " );
                 }
                 else if (positionXJoueur4 == positionXJoyau2_4  && positionYJoueur4 == positionYJoyau2_4 && GestionJoueurs.listeJoueurs.get(valueOfPlayer).toutesCartes.getProgramme().size() == 0) {
                     plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "    joyau  " + GestionJoyaux.listeJoyaux.get(valueOfPlayer).getNumeroJoyau() + "     ";
+                    GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosX(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosXInit());
+                    GestionJoueurs.listeJoueurs.get(valueOfPlayer).setPosY(GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosYInit());
                     System.out.println(" \n Bravo Joueur " + GestionJoueurs.listeJoueurs.get(valueOfPlayer).getNumero() + " vous avez atteint le joyau " );
                 }
                 else{
