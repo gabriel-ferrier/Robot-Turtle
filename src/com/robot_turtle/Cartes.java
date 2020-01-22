@@ -1,6 +1,8 @@
 package com.robot_turtle;
 
 public enum Cartes {
+
+    // Enumeration des differents types de cartes, définis par une couleur
     BLEU("carte bleue"),
     JAUNE("carte jaune"),
     VIOLET("carte violette"),
@@ -8,13 +10,7 @@ public enum Cartes {
     PIERRE("obstacle marron"),
     GLACE("obstacle de glace");
 
-    private final String couleur;
-
     Cartes(String couleur) {
-        this.couleur = couleur;
     }
 
-    public String couleur() {
-        return couleur;
-    }
 }

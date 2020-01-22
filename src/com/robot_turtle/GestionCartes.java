@@ -2,25 +2,29 @@ package com.robot_turtle;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 
-public class GestionCartes {
-    private int numero;
-    private ArrayList<Cartes> programme = new ArrayList<>(); //correspond au programme personnalisé de chaque joueur
-    private ArrayList<Cartes> pioche = new ArrayList<>(); //liste des jeux de 37 cartes de chaque joueur
-    private ArrayList<Cartes> deckCarte = new ArrayList<>(); //liste des jeuPerso de carte de chaque joueur
-    private ArrayList<Cartes> deckObstacle = new ArrayList<>(); //liste des jeuPerso d'obstacles de chaque joueur
-    private ArrayList<Cartes> defausse = new ArrayList<>(); //poubelle de carte
+class GestionCartes {
+    private ArrayList<Cartes> programme = new ArrayList<>();            // Programme formé par un joueur
+    private ArrayList<Cartes> pioche = new ArrayList<>();               // Pioche de 37 cartes de chaque joueur
+    private ArrayList<Cartes> deckCarte = new ArrayList<>();            // Deck de 5 cartes d'un joueur
+    private ArrayList<Cartes> deckObstacle = new ArrayList<>();         // Deck d'obstacles attribué par défaut à chaque joueur
+    private ArrayList<Cartes> defausse = new ArrayList<>();             // Défausse des cartes d'un joueur
 
-    public GestionCartes(int numero) {//On associe une pioche et un jeuPerso carte/obs a chaque joueur
-        this.numero = numero;
+    /**
+     * Constructeur appellé dans Joueur pour associer les attributs de cette classe à chacun des joueurs
+     **/
+    GestionCartes(int numero) {
+
+        // Creation du deck d'obstacles des joueurs
         for (int i = 0; i < 3; i++) {
             this.deckObstacle.add(Cartes.PIERRE);
         }
         for (int i = 0; i < 2; i++) {
             deckObstacle.add(Cartes.GLACE);
         }
+
+        // Creation de la pioche des joueurs
         for (int i = 0; i < 18; i++) {
             pioche.add(Cartes.BLEU);
         }
@@ -36,53 +40,37 @@ public class GestionCartes {
         for (int i = 0; i < 1; i++) {
             deckCarte.add(Cartes.ROUGE);
         }
-        Collections.shuffle(pioche); //Melange l'ordre des cartes de la pioche
-        for (int i = 0; i < 4; i++) {
+        Collections.shuffle(pioche);                                    // Melanger l'ordre des cartes de la pioche
+        for (int i = 0; i < 4; i++) {                                   // Definir le deck de 5 cartes aléatoires d'un joueur en début de partie
             this.deckCarte.add(this.pioche.get((pioche.size() - 1)));
             this.pioche.remove((pioche.size() - 1));
         }
-       /* if (pioche.size() == 0){  // TODO: vérifier si ca marche
+       if (pioche.size() == 0){  // TODO: vérifier si ca marche
             pioche.addAll(defausse);
-        }*/
+        }
     }
 
-    public ArrayList<Cartes> getProgramme() {
+    /**
+     * Getters necessaires au programme, essentiellement dans la classe Joueur
+     **/
+    ArrayList<Cartes> getProgramme() {
         return programme;
     }
 
-    public void setProgramme(ArrayList<Cartes> programme) {
-        this.programme = programme;
-    }
-
-    public ArrayList<Cartes> getPioche() {
+    ArrayList<Cartes> getPioche() {
         return pioche;
     }
 
-    public void setPioche(ArrayList<Cartes> pioche) {
-        this.pioche = pioche;
-    }
-
-    public ArrayList<Cartes> getDeckCarte() {
+    ArrayList<Cartes> getDeckCarte() {
         return deckCarte;
     }
 
-    public void setJDeckCarte(ArrayList<Cartes> jeuxPersoCarte) {
-        this.deckCarte = jeuxPersoCarte;
-    }
-
-    public ArrayList<Cartes> getDeckObstacle() {
+    ArrayList<Cartes> getDeckObstacle() {
         return deckObstacle;
     }
 
-    public void setDeckObstacle(ArrayList<Cartes> jeuxPersoObstacle) {
-        this.deckObstacle = jeuxPersoObstacle;
-    }
-
-    public ArrayList<Cartes> getDefausse() {
+    ArrayList<Cartes> getDefausse() {
         return defausse;
     }
 
-    public void setDefausse(ArrayList<Cartes> defausse) {
-        this.defausse = defausse;
-    }
 }

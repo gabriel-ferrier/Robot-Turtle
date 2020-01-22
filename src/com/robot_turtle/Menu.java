@@ -2,25 +2,24 @@ package com.robot_turtle;
 
 import java.util.Scanner;
 
-public class Menu {
-    public static Scanner scanner = new Scanner(System.in);
-    public int nombreJoueurs;
+class Menu {
+    private static Scanner scanner = new Scanner(System.in);
+    private int nombreJoueurs;
 
-
-    public Menu() {
+    /**
+     * Constructeur appellé dans le main de la classe Game pour implémenter le jeu selon le nombre de joueurs de la partie
+     **/
+    Menu() {
         System.out.println("         ****** Bienvenue dans le jeu ROBOT TURTLE !!! ******         \n" +
                 "Pour commencer veuillez indiquer combien de joueurs seront de la partie (2,3 ou 4) \n");
         nombreJoueurs = scanner.nextInt();
     }
 
-    public int getNombreJoueurs() {
+
+    int getNombreJoueurs() {
         return nombreJoueurs;
     }
 
-
-    public void setNombreJoueurs(int nombreJoueurs) {
-        this.nombreJoueurs = nombreJoueurs;
-    }
 
 }
 

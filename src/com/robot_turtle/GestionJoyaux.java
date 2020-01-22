@@ -2,10 +2,13 @@ package com.robot_turtle;
 
 import java.util.ArrayList;
 
-public class GestionJoyaux {
-    public static ArrayList<Joyau> listeJoyaux = new ArrayList<>(); //liste de tous les joyaux
+class GestionJoyaux {
+    static ArrayList<Joyau> listeJoyaux = new ArrayList<>();    // Liste de tous les joyaux
 
-    public GestionJoyaux(int nbJoueurs) {
+    /**
+     * Constructeur pour l'initialisation des joyaux nécessaires au plateau, selon le nombre de joueurs de la partie
+     **/
+    GestionJoyaux(int nbJoueurs) {
         switch (nbJoueurs) {
             case 2:
                 listeJoyaux.add(new Joyau(1));
@@ -24,7 +27,4 @@ public class GestionJoyaux {
 
     }
 
-    public ArrayList<Joyau> getListeJoyaux() {
-        return listeJoyaux;
-    }
 }
