@@ -11,7 +11,9 @@ public class Joueur {
     private int posY;                       // Position tortue
     private int posXInit;                   // Position tortue initiale
     private int posYInit;                   // Position tortue initiale
-    private String direction = " SUD ";     // Direction initiale de la tortue
+    private String direction = " SUD ";
+    // Direction initiale de la tortue
+
     private GestionCartes toutesCartes;     // Avoir accès aux jeux de cartes de chaque joueur
 
 
@@ -408,18 +410,48 @@ public class Joueur {
                     switch (GestionJoueurs.listeJoueurs.get(valueOfPlayer).getDirection()) {
                         case " SUD ":
                             boolean test = true;
-                            for (int j = GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX() + 1; j < 8; j++) {
-                                for (int k = 0; k < Game.getNbJoueurs(); k++) {
-                                    // Cas ou le laser touche un mur de glace
-                                    if ((plateau[j][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()]).equals("   mur en glace  ") && test) {
-                                        // On remplace la case de l'obstacle detruit par une case vide
-                                        System.out.println("Vous avez détruit l'obstacle devant vous \n");
-                                        plateau[j][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "        0        ";
-                                        test = false;
-                                    } else if (plateau[j][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()].equals("    tortue  " + GestionJoueurs.listeJoueurs.get(k).getNumero() + "    ") && test) {
-                                        laserTortues(k, plateau);
-                                        test = false;
+                            for (int j = GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX() + 1; j < 8; j++) {                    // Parcourir les tuiles devant le joueur
+                                for (int k = 0; k < Game.getNbJoueurs(); k++) {                                                         // Parcourir les joueurs
+                                    for (int compteurJoyau = 0; compteurJoyau < GestionJoyaux.listeJoyaux.size(); compteurJoyau++) {    // Parcourir les joyaux
+                                        // Cas ou le laser touche un mur de glace
+                                        if ((plateau[j][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()]).equals("   mur en glace  ") && test) {
+                                            // On remplace la case de l'obstacle detruit par une case vide
+                                            System.out.println("Vous avez détruit l'obstacle devant vous \n");
+                                            plateau[j][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "        0        ";
+                                            test = false;
+                                        } // Cas ou le laser touche une autre tortue
+                                        else if (plateau[j][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()].equals("    tortue  " + GestionJoueurs.listeJoueurs.get(k).getNumero() + "    ") && test) {
+                                            switch (Game.getNbJoueurs()) {
+                                                case 2:
+                                                    System.out.println(" Votre laser a touché une tortue, celle-ci fait demi-tour ! \n");
+                                                    laser(k, plateau);
+                                                    break;
+                                                case 3:
+                                                case 4:
+                                                    System.out.println(" Votre laser a touché une tortue, celle-ci retourne à sa position initiale !\n");
+                                                    laser(k, plateau);
+                                                    break;
+                                            }
+                                            test = false;
+                                        } // Cas ou le laser touche un joyau
+                                        else if (plateau[j][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()].equals("    joyau  " + GestionJoyaux.listeJoyaux.get(compteurJoyau).getNumeroJoyau() + "     ") && test) {
+                                            switch (Game.getNbJoueurs()) {
+                                                case 2:
+                                                    System.out.println(" Votre laser a touché un joyau, vous faites demi-tour ! \n");
+                                                    laser(valueOfPlayer, plateau);
+                                                    plateau[GestionJoyaux.listeJoyaux.get(compteurJoyau).getPosXJoyau()][GestionJoyaux.listeJoyaux.get(compteurJoyau).getPosYJoyau()] = "    joyau  " + GestionJoyaux.listeJoyaux.get(compteurJoyau).getNumeroJoyau() + "     ";
+                                                    break;
+                                                case 3:
+                                                case 4:
+                                                    System.out.println(" Votre laser a touché un joyau, vous retournez à votre position initiale !\n");
+                                                    laser(valueOfPlayer, plateau);
+                                                    plateau[GestionJoyaux.listeJoyaux.get(compteurJoyau).getPosXJoyau()][GestionJoyaux.listeJoyaux.get(compteurJoyau).getPosYJoyau()] = "    joyau  " + GestionJoyaux.listeJoyaux.get(compteurJoyau).getNumeroJoyau() + "     ";
+                                                    break;
+                                            }
+                                            test = false;
+                                        }
                                     }
+
                                 }
                             }
                             break;
@@ -427,15 +459,45 @@ public class Joueur {
                             boolean test2 = true;
                             for (int j = GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX() - 1; j >= 0; j--) {
                                 for (int k = 0; k < Game.getNbJoueurs(); k++) {
-                                    if ((plateau[j][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()]).equals("   mur en glace  ") && test2) {
-                                        // On remplace la case de l'obstacle detruit par une case vide
-                                        System.out.println("Vous avez détruit l'obstacle devant vous \n");
-                                        plateau[j][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "        0        ";
-                                        test2 = false;
-                                    } else if (plateau[j][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()].equals("    tortue  " + GestionJoueurs.listeJoueurs.get(k).getNumero() + "    ") && test2) {
-                                        laserTortues(k, plateau);
-                                        test2 = false;
+                                    for (int compteurJoyau = 0; compteurJoyau < GestionJoyaux.listeJoyaux.size(); compteurJoyau++) {
+                                        if ((plateau[j][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()]).equals("   mur en glace  ") && test2) {
+                                            // On remplace la case de l'obstacle detruit par une case vide
+                                            System.out.println("Vous avez détruit l'obstacle devant vous \n");
+                                            plateau[j][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "        0        ";
+                                            test2 = false;
+                                        } // Cas ou le laser touche une autre tortue
+                                        else if (plateau[j][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()].equals("    tortue  " + GestionJoueurs.listeJoueurs.get(k).getNumero() + "    ") && test2) {
+                                            switch (Game.getNbJoueurs()) {
+                                                case 2:
+                                                    System.out.println(" Votre laser a touché une tortue, celle-ci fait demi-tour ! \n");
+                                                    laser(k, plateau);
+                                                    break;
+                                                case 3:
+                                                case 4:
+                                                    System.out.println(" Votre laser a touché une tortue, celle-ci retourne à sa position initiale !\n");
+                                                    laser(k, plateau);
+                                                    break;
+                                            }
+                                            test2 = false;
+                                        }// Cas ou le laser touche un joyau
+                                        else if (plateau[j][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()].equals("    joyau  " + GestionJoyaux.listeJoyaux.get(compteurJoyau).getNumeroJoyau() + "     ") && test2) {
+                                            switch (Game.getNbJoueurs()) {
+                                                case 2:
+                                                    System.out.println(" Votre laser a touché un joyau, vous faites demi-tour ! \n");
+                                                    laser(valueOfPlayer, plateau);
+                                                    plateau[GestionJoyaux.listeJoyaux.get(compteurJoyau).getPosXJoyau()][GestionJoyaux.listeJoyaux.get(compteurJoyau).getPosYJoyau()] = "    joyau  " + GestionJoyaux.listeJoyaux.get(compteurJoyau).getNumeroJoyau() + "     ";
+                                                    break;
+                                                case 3:
+                                                case 4:
+                                                    System.out.println(" Votre laser a touché un joyau, vous retournez à votre position initiale !\n");
+                                                    laser(valueOfPlayer, plateau);
+                                                    plateau[GestionJoyaux.listeJoyaux.get(compteurJoyau).getPosXJoyau()][GestionJoyaux.listeJoyaux.get(compteurJoyau).getPosYJoyau()] = "    joyau  " + GestionJoyaux.listeJoyaux.get(compteurJoyau).getNumeroJoyau() + "     ";
+                                                    break;
+                                            }
+                                            test2 = false;
+                                        }
                                     }
+
                                 }
                             }
                             break;
@@ -443,15 +505,45 @@ public class Joueur {
                             boolean test3 = true;
                             for (int j = GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY() - 1; j >= 0; j--) {
                                 for (int k = 0; k < Game.getNbJoueurs(); k++) {
-                                    if ((plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][j].equals("   mur en glace  ") && test3)) {
-                                        // On remplace la case de l'obstacle detruit par une case vide
-                                        System.out.println("Vous avez détruit l'obstacle devant vous \n");
-                                        plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][j] = "        0        ";
-                                        test3 = false;
-                                    } else if (plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][j].equals("    tortue  " + GestionJoueurs.listeJoueurs.get(k).getNumero() + "    ") && test3) {
-                                        laserTortues(k, plateau);
-                                        test3 = false;
+                                    for (int compteurJoyau = 0; compteurJoyau < GestionJoyaux.listeJoyaux.size(); compteurJoyau++) {
+                                        if ((plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][j].equals("   mur en glace  ") && test3)) {
+                                            // On remplace la case de l'obstacle detruit par une case vide
+                                            System.out.println("Vous avez détruit l'obstacle devant vous \n");
+                                            plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][j] = "        0        ";
+                                            test3 = false;
+                                        } // Cas ou le lase touche une autre tortue
+                                        else if (plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][j].equals("    tortue  " + GestionJoueurs.listeJoueurs.get(k).getNumero() + "    ") && test3) {
+                                            switch (Game.getNbJoueurs()) {
+                                                case 2:
+                                                    System.out.println(" Votre laser a touché une tortue, celle-ci fait demi-tour ! \n");
+                                                    laser(k, plateau);
+                                                    break;
+                                                case 3:
+                                                case 4:
+                                                    System.out.println(" Votre laser a touché une tortue, celle-ci retourne à sa position initiale !\n");
+                                                    laser(k, plateau);
+                                                    break;
+                                            }
+                                            test3 = false;
+                                        } // Cas ou le laser touche un joyau
+                                        else if (plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][j].equals("    joyau  " + GestionJoyaux.listeJoyaux.get(compteurJoyau).getNumeroJoyau() + "     ") && test3) {
+                                            switch (Game.getNbJoueurs()) {
+                                                case 2:
+                                                    System.out.println(" Votre laser a touché un joyau, vous faites demi-tour ! \n");
+                                                    laser(valueOfPlayer, plateau);
+                                                    plateau[GestionJoyaux.listeJoyaux.get(compteurJoyau).getPosXJoyau()][GestionJoyaux.listeJoyaux.get(compteurJoyau).getPosYJoyau()] = "    joyau  " + GestionJoyaux.listeJoyaux.get(compteurJoyau).getNumeroJoyau() + "     ";
+                                                    break;
+                                                case 3:
+                                                case 4:
+                                                    System.out.println(" Votre laser a touché un joyau, vous retournez à votre position initiale !\n");
+                                                    laser(valueOfPlayer, plateau);
+                                                    plateau[GestionJoyaux.listeJoyaux.get(compteurJoyau).getPosXJoyau()][GestionJoyaux.listeJoyaux.get(compteurJoyau).getPosYJoyau()] = "    joyau  " + GestionJoyaux.listeJoyaux.get(compteurJoyau).getNumeroJoyau() + "     ";
+                                                    break;
+                                            }
+                                            test3 = false;
+                                        }
                                     }
+
                                 }
                             }
                             break;
@@ -459,23 +551,47 @@ public class Joueur {
                             boolean test4 = true;
                             for (int j = GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY() + 1; j < 8; j++) {
                                 for (int k = 0; k < Game.getNbJoueurs(); k++) {
-                                    if ((plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][j]).equals("   mur en glace  ") && test4) {
-                                        // On remplace la case de l'obstacle detruit par une case vide
-                                        System.out.println("Vous avez détruit l'obstacle devant vous \n");
-                                        plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][j] = "        0        ";
-                                        test4 = false;
-                                    } else if (plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][j].equals("    tortue  " + GestionJoueurs.listeJoueurs.get(k).getNumero() + "    ") && test4) {
-                                        laserTortues(k, plateau);
-                                        test4 = false;
+                                    for (int compteurJoyau = 0; compteurJoyau < GestionJoyaux.listeJoyaux.size(); compteurJoyau++) {
+                                        if ((plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][j]).equals("   mur en glace  ") && test4) {
+                                            // On remplace la case de l'obstacle detruit par une case vide
+                                            System.out.println("Vous avez détruit l'obstacle devant vous \n");
+                                            plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][j] = "        0        ";
+                                            test4 = false;
+                                        } else if (plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][j].equals("    tortue  " + GestionJoueurs.listeJoueurs.get(k).getNumero() + "    ") && test4) {
+                                            switch (Game.getNbJoueurs()) {
+                                                case 2:
+                                                    System.out.println(" Votre laser a touché une tortue, celle-ci fait demi-tour ! \n");
+                                                    laser(k, plateau);
+                                                    break;
+                                                case 3:
+                                                case 4:
+                                                    System.out.println(" Votre laser a touché une tortue, celle-ci retourne à sa position initiale !\n");
+                                                    laser(k, plateau);
+                                                    break;
+                                            }
+                                            test4 = false;
+                                        } // Cas ou le laser touche un joyau
+                                        else if (plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][j].equals("    joyau  " + GestionJoyaux.listeJoyaux.get(compteurJoyau).getNumeroJoyau() + "     ") && test4) {
+                                            switch (Game.getNbJoueurs()) {
+                                                case 2:
+                                                    System.out.println(" Votre laser a touché un joyau, vous faites demi-tour ! \n");
+                                                    laser(valueOfPlayer, plateau);
+                                                    plateau[GestionJoyaux.listeJoyaux.get(compteurJoyau).getPosXJoyau()][GestionJoyaux.listeJoyaux.get(compteurJoyau).getPosYJoyau()] = "    joyau  " + GestionJoyaux.listeJoyaux.get(compteurJoyau).getNumeroJoyau() + "     ";
+                                                    break;
+                                                case 3:
+                                                case 4:
+                                                    System.out.println(" Votre laser a touché un joyau, vous retournez à votre position initiale !\n");
+                                                    laser(valueOfPlayer, plateau);
+                                                    plateau[GestionJoyaux.listeJoyaux.get(compteurJoyau).getPosXJoyau()][GestionJoyaux.listeJoyaux.get(compteurJoyau).getPosYJoyau()] = "    joyau  " + GestionJoyaux.listeJoyaux.get(compteurJoyau).getNumeroJoyau() + "     ";
+                                                    break;
+                                            }
+                                            test4 = false;
+                                        }
                                     }
                                 }
-
                             }
                             break;
-
-
                     }
-
             }
         }
 
@@ -489,13 +605,11 @@ public class Joueur {
 
     }
 
-
-    private void laserTortues(int valueOfPlayer, String[][] plateau) {
+    private void laser(int valueOfPlayer, String[][] plateau) {
         // Les conséquences dépendent du nombre de joueur
         switch (Game.getNbJoueurs()) {
             // Changement de direction à 180° pour la tortue touchée
             case 2:
-                System.out.println("Votre laser a touché une tortue, celle-ci fait donc demi-tour ! \n");
                 switch (GestionJoueurs.listeJoueurs.get(valueOfPlayer).getDirection()) {
                     case " SUD ":
                         GestionJoueurs.listeJoueurs.get(valueOfPlayer).setDirection(" NORD ");
@@ -514,7 +628,6 @@ public class Joueur {
             // Retour à la position initiale pour la tortue touchée
             case 3:
             case 4:
-                System.out.println("Votre laser a touché une tortue, celle-ci retourne à sa position initiale ! \n");
                 // Remplacer la position de la tortue touchée par une case vide
                 plateau[GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosX()][GestionJoueurs.listeJoueurs.get(valueOfPlayer).getPosY()] = "        0        ";
                 // Renvoyer la tortue touchée à sa positions initales

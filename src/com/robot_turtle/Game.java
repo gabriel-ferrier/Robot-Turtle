@@ -16,7 +16,9 @@ public class Game {
         return nbJoueurs;
     }
 
-    static int getJoueurActuel() { return joueurActuel; }
+    static int getJoueurActuel() {
+        return joueurActuel;
+    }
 
     /**
      * Setter du fin du jeu, utilisé dans la classe Joueur pour mettre fin au jeu
@@ -30,6 +32,7 @@ public class Game {
      * Méthode main executant ainsi tout le fonctionnement du jeu
      **/
     public static void main(String[] args) {
+
         Menu menu = new Menu();
         nbJoueurs = menu.getNombreJoueurs();
         GestionJoueurs joueurs = new GestionJoueurs(nbJoueurs);     // Lance la création des joueurs
@@ -38,10 +41,12 @@ public class Game {
         plateau.afficherPlateauInit(nbJoueurs);                     // Affiche plateau initial en fonction du nombre de joueurs et donc de joyaux
 
 
-        joueurActuel = random.nextInt(nbJoueurs);                   // Le 1er joueur à joueur est tiré aléatoirement parmis le nombre de joueurs
+        joueurActuel = random.nextInt(nbJoueurs);      // Le 1er joueur à joueur est tiré aléatoirement parmis le nombre de joueurs
 
         // Boucle infinie sous condition permettant d'executer les actions de tour de jeu de chaque joueur tant qu'il n'y en pas un qui perd
         // La vartiable finDuJeu est modifée dans la classe joueur lorsqu'un joueur perd
+
+
         while (finDuJeu == 0) {
             do {
                 joueurs.getListeJoueurs().get(joueurActuel).instruction(plateau);       // Lance le tour de jeu d'un des jouers

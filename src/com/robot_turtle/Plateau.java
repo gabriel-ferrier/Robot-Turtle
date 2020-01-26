@@ -51,8 +51,8 @@ class Plateau {
                 GestionJoyaux.listeJoyaux.get(0).setPosYJoyau(3);
 
                 // Positions initiales des joueurs
-                GestionJoueurs.listeJoueurs.get(0).setPosXInit(2);
-                GestionJoueurs.listeJoueurs.get(0).setPosYInit(4);
+                GestionJoueurs.listeJoueurs.get(0).setPosXInit(0);
+                GestionJoueurs.listeJoueurs.get(0).setPosYInit(1);
                 GestionJoueurs.listeJoueurs.get(1).setPosXInit(0);
                 GestionJoueurs.listeJoueurs.get(1).setPosYInit(5);
 
@@ -72,7 +72,9 @@ class Plateau {
                     plateau[i][7] = "  mur en pierre  ";
                 }
                 // Positionnement des tortues
+
                 plateau[GestionJoueurs.listeJoueurs.get(0).getPosXInit()][GestionJoueurs.listeJoueurs.get(0).getPosYInit()] = "     tortue 1    ";
+
                 plateau[GestionJoueurs.listeJoueurs.get(1).getPosXInit()][GestionJoueurs.listeJoueurs.get(1).getPosYInit()] = "     tortue 2    ";
                 // Positionnement du joyau
                 plateau[GestionJoyaux.listeJoyaux.get(0).getPosXJoyau()][GestionJoyaux.listeJoyaux.get(0).getPosYJoyau()] = "    joyau  " + GestionJoyaux.listeJoyaux.get(0).getNumeroJoyau() + "     ";
@@ -136,13 +138,13 @@ class Plateau {
                 GestionJoyaux.listeJoyaux.get(1).setPosYJoyau(6);
 
                 // Positions initiales des joueurs
-                GestionJoueurs.listeJoueurs.get(0).setPosXInit(0);
+                GestionJoueurs.listeJoueurs.get(0).setPosXInit(7);
                 GestionJoueurs.listeJoueurs.get(0).setPosYInit(0);
-                GestionJoueurs.listeJoueurs.get(1).setPosXInit(0);
+                GestionJoueurs.listeJoueurs.get(1).setPosXInit(2);
                 GestionJoueurs.listeJoueurs.get(1).setPosYInit(2);
-                GestionJoueurs.listeJoueurs.get(2).setPosXInit(0);
+                GestionJoueurs.listeJoueurs.get(2).setPosXInit(7);
                 GestionJoueurs.listeJoueurs.get(2).setPosYInit(5);
-                GestionJoueurs.listeJoueurs.get(3).setPosXInit(0);
+                GestionJoueurs.listeJoueurs.get(3).setPosXInit(7);
                 GestionJoueurs.listeJoueurs.get(3).setPosYInit(7);
 
                 // Initialisation des posistions des joueurs à ses positions initiales pour pouvoir travailler dessus apres
