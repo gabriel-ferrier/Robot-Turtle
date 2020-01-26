@@ -45,6 +45,11 @@ class GestionCartes {
             this.deckCarte.add(this.pioche.get((pioche.size() - 1)));
             this.pioche.remove((pioche.size() - 1));
         }
+        //if (GestionJoueurs.listeJoueurs.get())
+
+
+
+
        if (pioche.size() == 0){  // TODO: vérifier si ca marche
             pioche.addAll(defausse);
         }
@@ -73,4 +78,7 @@ class GestionCartes {
         return defausse;
     }
 
+    public void setPioche(ArrayList<Cartes> pioche) { this.pioche = pioche; }
+
+    public void setDefausse(ArrayList<Cartes> defausse) { this.defausse = defausse; }
 }

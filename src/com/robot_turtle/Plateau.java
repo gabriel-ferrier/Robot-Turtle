@@ -51,8 +51,8 @@ class Plateau {
                 GestionJoyaux.listeJoyaux.get(0).setPosYJoyau(3);
 
                 // Positions initiales des joueurs
-                GestionJoueurs.listeJoueurs.get(0).setPosXInit(0);
-                GestionJoueurs.listeJoueurs.get(0).setPosYInit(1);
+                GestionJoueurs.listeJoueurs.get(0).setPosXInit(2);
+                GestionJoueurs.listeJoueurs.get(0).setPosYInit(4);
                 GestionJoueurs.listeJoueurs.get(1).setPosXInit(0);
                 GestionJoueurs.listeJoueurs.get(1).setPosYInit(5);
 
@@ -64,7 +64,7 @@ class Plateau {
 
                 System.out.println("Chaque joueur se voit attribué la tortue de son numéro. " +
                         "\nATTENTION, il est FORMELLEMENT INTERDIT de bloquer le chemin à un joyau lorsque vous placé un obstacle !! " +
-                        "\nATTENTION, pour gagner vous devez vous rendre EXACTEMENT sur un joyau \n");
+                        "\nATTENTION, pour gagner vous devez vous rendre EXACTEMENT sur un joyau !! \n");
                 System.out.println("Voici votre plateau de jeu :\n");
 
                 // Positionnement de la colonne d'obstacle de pierre
